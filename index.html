@@ -10,8 +10,8 @@
         /* CSS Variables for Colors */
         :root {
             --primary-green: #4CAF50;
-            --secondary-mint: #D7EBD8; /* Lighter mint green */
-            --fragrance-cyan: #E0F7FA; /* Lighter cyan */
+            --secondary-mint: #D7EBD8;
+            --fragrance-cyan: #E0F7FA;
             --accent-sage: #5E9F61;
             --white: #FFFFFF;
             --text-dark: #1A1A1A;
@@ -80,11 +80,16 @@
             color: #708238; /* Olive Green for headings */
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links a {
             margin-left: 20px;
             text-decoration: none;
             color: var(--text-dark);
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -446,6 +451,34 @@
             .commitment-icons {
                 gap: 20px;
             }
+
+            /* Mobile styles for nav-links */
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+                margin-bottom: 10px;
+                padding: 12px 20px;
+                width: 100%;
+                text-align: center;
+                font-size: 18px; /* Slightly larger for better readability */
+                border-radius: 5px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background-color: var(--secondary-mint);
+                color: var(--primary-green);
+            }
         }
     </style>
 </head>
@@ -644,7 +677,7 @@
         </div>
         <div class="footer-content">
             <p>© 2025 Softleaf. All Rights Reserved.</p>
-            <p>Crafted with care for a cleaner tomorrow.</p>
+            <p>Bringing Freshness and Purity to Homes and Hospitals Worldwide.</p>
         </div>
     </footer>
 </body>
