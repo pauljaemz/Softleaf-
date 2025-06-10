@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softleaf - Hygiene and Cleaning Products</title>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <title>Softleaf - Global Hygiene & Cleaning Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <style>
         /* CSS Variables for Colors */
         :root {
-            --bg-cream: #F5F5DC;
-            --bg-mint: #E6F3D4;
-            --text-dark: #333333;
-            --text-medium: #666666;
-            --text-dark-green: #1A3C34;
-            --accent-green: #91ee91;
-            --leaf-green: #4CAF50;
+            --primary-green: #4CAF50;
+            --secondary-mint: #D7EBD8; /* Lighter mint green */
+            --fragrance-cyan: #E0F7FA; /* Lighter cyan */
+            --accent-sage: #5E9F61;
             --white: #FFFFFF;
-            --border-gray: #E0E0E0;
+            --text-dark: #1A1A1A;
+            --text-medium: #333333;
             --shadow: rgba(0, 0, 0, 0.1);
             --shadow-hover: rgba(0, 0, 0, 0.2);
-            --dot-dark: #4A4A4A;
         }
 
         /* General Styles */
@@ -31,170 +28,208 @@
         }
 
         body {
-            font-family: 'PT Sans', sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--text-medium);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            padding: 25px;
-            position: fixed;
+        /* Explicitly set font-family for non-heading elements */
+        p, a, button, input, textarea, .commitment-icons div, .product-card h3 {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Since Inter import doesn't include weights 500 and 600, adjust elements to use 400 */
+        .nav-links a, .marketplace-links a, .whatsapp-btn, button, .product-card h3 {
+            font-weight: 400; /* Fallback to available weight */
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
             top: 0;
             width: 100%;
-            background-color: var(--bg-cream);
+            background-color: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
             z-index: 1000;
+            padding: 15px 40px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Align to the left in header */
-        }
-
-        .footer-content .logo {
-            justify-content: center; /* Center the logo content in the footer */
         }
 
         .logo img {
-            height: 25px;
+            height: 30px;
             margin-right: 10px;
         }
 
         .logo span {
+            font-family: 'Marcellus', serif;
             font-size: 28px;
-            font-weight: 700;
+            color: #708238; /* Olive Green for headings */
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            text-decoration: none;
             color: var(--text-dark);
+            transition: color 0.3s ease;
         }
 
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Hero Section */
         .hero {
+            position: relative;
+            height: 80vh;
+            background: linear-gradient(135deg, var(--secondary-mint) 0%, var(--fragrance-cyan) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 80px 20px;
-            background-color: var(--bg-mint);
-            color: #244224;
-            margin-top: 80px;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 40px;
-            font-weight: 700;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,186.7C672,171,768,149,864,144C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Marcellus', serif;
+            font-size: 52px;
+            color: #708238; /* Olive Green for headings */
             margin-bottom: 20px;
-            text-transform: capitalize;
         }
 
-        .hero p {
+        .hero-content p {
             font-size: 18px;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto 10px;
+            color: var(--text-medium);
+            margin-bottom: 30px;
         }
 
-        .section {
-            padding: 50px 20px;
-            max-width: 1200px;
+        .hero-content .cta-btn {
+            background-color: var(--accent-sage);
+            color: var(--text-dark);
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            border: 1px solid #4A7B4C;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-content .cta-btn:hover {
+            background-color: #4A7B4C;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 80px 40px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        h2 {
+        .section-title {
+            font-family: 'Marcellus', serif;
             font-size: 36px;
-            font-weight: 700;
-            color: var(--text-dark-green);
+            color: #708238; /* Olive Green for headings */
             text-align: center;
-            margin-bottom: 30px;
-            text-transform: capitalize;
+            margin-bottom: 50px;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .product-card {
-            background-color: #EDEDED;
+            background-color: var(--white);
             border-radius: 10px;
-            padding: 0 0 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 8px var(--shadow);
-            width: 400px;
-            margin: 0 auto;
-            transition: box-shadow 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .product-card:hover {
-            box-shadow: 0 6px 12px var(--shadow-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px var(--shadow-hover);
         }
 
         .product-card img {
-            width: 400px;
-            height: 300px;
-            max-width: 100%;
-            border-radius: 10px 10px 0 0;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card-content {
+            padding: 20px;
+            text-align: center;
         }
 
         .product-card h3 {
             font-size: 20px;
-            font-weight: 700;
             color: var(--text-dark);
-            margin: 15px 0;
+            margin-bottom: 10px;
         }
 
         .product-card p {
             font-size: 14px;
-            font-weight: 400;
             color: var(--text-medium);
         }
 
-        a.product-card {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-dots {
+        /* Marketplace Section */
+        .marketplace-section {
+            padding: 60px 40px;
+            background-color: var(--secondary-mint);
             text-align: center;
-            margin-top: 20px;
         }
 
-        .dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: transparent;
-            border: 1px solid var(--dot-dark);
-            border-radius: 50%;
-            margin: 0 5px;
-        }
-
-        .dot.active {
-            background-color: var(--dot-dark);
-        }
-
-        .marketplace {
-            text-align: center;
-            background-color: var(--bg-mint);
-            padding: 30px 20px;
-            color: #244224;
-        }
-
-        .marketplace p {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 20px;
+        .marketplace-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .marketplace-links a {
             display: inline-flex;
             align-items: center;
-            background-color: var(--accent-green);
-            color: #000000;
+            background-color: var(--primary-green);
+            color: var(--white);
             padding: 15px 30px;
-            margin: 10px;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
+            border-radius: 5px;
             font-size: 16px;
-            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease;
         }
 
         .marketplace-links a svg {
@@ -203,43 +238,76 @@
             margin-right: 8px;
         }
 
-        .brochure-form {
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--shadow);
-            border: 1px solid var(--border-gray);
-            margin: 0 auto;
-            max-width: 400px;
+        .marketplace-links a:hover {
+            background-color: #388E3C;
         }
 
-        .contact-form {
-            background-color: var(--white);
-            padding: 20px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--shadow);
-            border: 1px solid var(--border-gray);
-            margin: 0 auto;
-            max-width: 1100px;
-            min-width: 350px;
-            height: auto;
+        /* Commitment Section */
+        .commitment-section {
+            padding: 60px 0;
+            background-color: #E1F5FE;
+            text-align: center;
+            width: 100%;
         }
 
-        .brochure-form h3, .contact-form h3, .whatsapp-connect h3, .social-media h3 {
-            font-size: 24px;
-            font-weight: 700;
+        .commitment-section p {
+            font-size: 16px;
+            color: var(--text-medium);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .commitment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .commitment-icons div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
             color: var(--text-dark);
+        }
+
+        .commitment-icons svg {
+            width: 40px;
+            height: 40px;
+            color: var(--primary-green);
+        }
+
+        /* Connect Section */
+        .connect-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-form, .connect-options {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .connect-options {
+            background: linear-gradient(135deg, var(--secondary-mint) 0%, var(--fragrance-cyan) 100%);
+        }
+
+        .connect-section h3 {
+            font-family: 'Marcellus', serif;
+            font-size: 28px;
+            color: #708238; /* Olive Green for headings */
             margin-bottom: 20px;
             text-align: center;
-            text-transform: capitalize;
-        }
-
-        .contact-form form {
-            gap: 10px;
-        }
-
-        .contact-form h3 {
-            margin-bottom: 10px;
         }
 
         form {
@@ -249,12 +317,11 @@
         }
 
         input, textarea {
-            padding: 10px;
-            border: 1px solid var(--border-gray);
+            padding: 12px;
+            border: 1px solid #E0E0E0;
             border-radius: 5px;
-            font-family: 'PT Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
-            font-weight: 400;
             color: var(--text-dark);
         }
 
@@ -263,177 +330,202 @@
         }
 
         button {
-            background-color: var(--accent-green);
-            color: #000000;
-            padding: 10px;
-            border: none;
+            background-color: var(--accent-sage);
+            color: var(--text-dark);
+            padding: 14px;
+            border: 1px solid #4A7B4C;
             border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
             font-size: 16px;
             cursor: pointer;
-            text-transform: capitalize;
+            transition: background-color 0.3s ease;
         }
 
-        .whatsapp-connect {
-            background-color: var(--bg-mint);
-            padding: 30px 20px;
-            text-align: center;
-            color: #244224;
-        }
-
-        .whatsapp-connect p {
-            font-size: 16px;
-            font-weight: 400;
-            margin-bottom: 20px;
+        button:hover {
+            background-color: #4A7B4C;
         }
 
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
-            background-color: var(--accent-green);
-            color: #000000;
-            padding: 12px 24px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 5px;
             font-size: 16px;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
         }
 
-        .whatsapp-btn img {
+        .whatsapp-btn svg {
             width: 20px;
             height: 20px;
             margin-right: 8px;
         }
 
-        .connect-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .social-media {
-            padding: 20px;
+        .whatsapp-btn:hover {
+            background-color: #388E3C;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .social-icons a {
             width: 40px;
             height: 40px;
-            background-color: var(--accent-green);
+            background-color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            box-shadow: 0 2px 5px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .social-icons a img {
-            width: 20px;
-            height: 20px;
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px var(--shadow-hover);
         }
 
+        /* Footer */
         footer {
-            text-align: center;
             padding: 20px;
-            margin-top: 50px;
             background-color: #ebf4d7;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            font-family: 'Marcellus', serif;
+            font-size: 28px;
+            color: #708238; /* Olive Green for headings */
         }
 
         .footer-content p {
-            font-size: 12px;
-            font-weight: 400;
-            color: var(--text-medium);
+            font-size: 14px;
             margin: 5px 0;
+            color: var(--text-dark);
         }
 
-        .footer-content p:last-child {
-            color: #888888;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .connect-grid {
+            .connect-section {
                 grid-template-columns: 1fr;
             }
+
             .product-grid {
                 grid-template-columns: 1fr;
             }
-            .product-card {
-                width: 100%;
-                max-width: 400px;
+
+            .hero {
+                height: 60vh;
             }
-            .product-card img {
-                width: 100%;
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .commitment-icons {
+                gap: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="leaf-icon.png" alt="Leaf Icon">
-            <span>Softleaf</span>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="leaf-icon.png" alt="Leaf Icon">
+                <span>Softleaf</span>
+            </div>
+            <div class="nav-links">
+                <a href="#products">Products</a>
+                <a href="#marketplace">Shop</a>
+                <a href="#connect">Connect</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
-        <h1>Welcome To Softleaf</h1>
-        <p>At Softleaf, we believe that a clean environment nurtures a healthy life. Our mission is to provide you with high-quality hygiene and cleaning products that are effective, safe, and kind to both your family and the planet.</p>
-        <p>We are committed to using nature-inspired ingredients and sustainable practices, ensuring every Softleaf product brings a touch of freshness and purity into your home. Experience the gentle power of Softleaf and transform your daily routines into moments of care.</p>
+        <div class="hero-content">
+            <h1>Softleaf – Scent of Purity</h1>
+            <p>Discover unique fragrances for sustainable hygiene. Experience the unique fragrance that sets us apart, ensuring a clean and fresh environment globally.</p>
+            <a href="#products" class="cta-btn">Explore Products</a>
+        </div>
     </section>
 
-    <section class="section">
-        <h2>Our Products</h2>
+    <section class="products-section" id="products">
+        <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <a href="#amazon-store" class="product-card">
-                <img src="product1.jpg" alt="Pure Hands Handwash" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Pure Hands Handwash</h3>
-                <p>Gentle yet effective handwash, leaving your hands clean and soft.</p>
-            </a>
-            <a href="#our-website" class="product-card">
-                <img src="product2.jpg" alt="Shield+ Hand Sanitizer" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Shield+ Hand Sanitizer</h3>
-                <p>Kills 99.9% of germs, perfect for on-the-go protection.</p>
-            </a>
-            <a href="#local-retailers" class="product-card">
-                <img src="product3.jpg" alt="Sparkle All-Purpose Cleaner" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Sparkle All-Purpose Cleaner</h3>
-                <p>Cuts through grease and grime on multiple surfaces.</p>
-            </a>
-            <a href="#amazon-store" class="product-card">
-                <img src="product4.jpg" alt="Fresh Linen Fabric Refresher" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Fresh Linen Fabric Refresher</h3>
-                <p>Eliminates odors and freshens fabrics with a light scent.</p>
-            </a>
-            <a href="#our-website" class="product-card">
-                <img src="product5.jpg" alt="Crystal Clear Glass Cleaner" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Crystal Clear Glass Cleaner</h3>
-                <p>Streak-free shine for windows and mirrors.</p>
-            </a>
-            <a href="#local-retailers" class="product-card">
-                <img src="product6.jpg" alt="Gentle Care Dish Soap" width="400" height="300" onerror="this.src='placeholder.jpg'">
-                <h3>Gentle Care Dish Soap</h3>
-                <p>Tough on grease, gentle on hands.</p>
-            </a>
-        </div>
-        <div class="nav-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+            <div class="product-card">
+                <img src="product1.jpg" alt="Pure Hands Handwash" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Pure Hands Handwash</h3>
+                    <p>Gentle yet effective, infused with our signature fragrance.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="product2.jpg" alt="Shield+ Hand Sanitizer" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Shield+ Hand Sanitizer</h3>
+                    <p>Kills 99.9% of germs, perfect for on-the-go protection.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="product3.jpg" alt="Sparkle All-Purpose Cleaner" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Sparkle All-Purpose Cleaner</h3>
+                    <p>Cuts through grease and grime on multiple surfaces.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="product4.jpg" alt="Fresh Linen Fabric Refresher" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Fresh Linen Fabric Refresher</h3>
+                    <p>Eliminates odors with a light, signature scent.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="product5.jpg" alt="Crystal Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Crystal Clear Glass Cleaner</h3>
+                    <p>Streak-free shine for windows and mirrors.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="product6.jpg" alt="Gentle Care Dish Soap" onerror="this.src='placeholder.jpg'">
+                <div class="product-card-content">
+                    <h3>Gentle Care Dish Soap</h3>
+                    <p>Tough on grease, gentle on hands.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="marketplace">
-        <h2>Find Softleaf Products</h2>
-        <p>Purchase your favorite Softleaf items conveniently from our trusted partners.</p>
+    <section class="marketplace-section" id="marketplace">
+        <h2 class="section-title">Find Softleaf Products</h2>
+        <p style="text-align: center; margin-bottom: 30px; font-size: 16px;">Purchase your favorite Softleaf items conveniently from our trusted partners.</p>
         <div class="marketplace-links">
             <a href="#amazon-store" id="amazon-store">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -441,7 +533,7 @@
                 Amazon Store
             </a>
             <a href="#our-website" id="our-website">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -449,7 +541,7 @@
                 Our Website
             </a>
             <a href="#local-retailers" id="local-retailers">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -459,70 +551,99 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="brochure-form">
-            <h3>Request Our Brochure</h3>
-            <form action="https://formspree.io/f/your-endpoint" method="POST">
-                <input type="email" name="email" placeholder="Email Address" required>
-                <button type="submit">Request Brochure</button>
-            </form>
+    <section class="commitment-section">
+        <h2 class="section-title">The Softleaf Commitment</h2>
+        <p>We are dedicated to providing high-quality hygiene and cleaning products that are sustainably sourced and environmentally friendly. Our products align with our core values of sustainability, nature conservation, and eco-consciousness.</p>
+        <div class="commitment-icons">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+                Natural Ingredients
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-recycle">
+                    <path d="M7 19H4.3a1.7 1.7 0 0 1-1.5-2.5l3.6-6.3"></path>
+                    <path d="m9 17 2 3"></path>
+                    <path d="M17 19h2.7a1.7 1.7 0 0 0 1.5-2.5l3.6-6.3"></path>
+                    <path d="m14 17-2 3"></path>
+                    <path d="M12 12v8"></path>
+                    <path d="m8 9.3 3.6-6.2a1.7 1.7 0 0 1 3 0l3.6 6.2"></path>
+                    <path d="M2 9.3h7"></path>
+                    <path d="m15 9.3 7-.7"></path>
+                </svg>
+                Sustainable Packaging
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                Cruelty-Free
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-down">
+                    <path d="M12 5v14"></path>
+                    <path d="m19 12-7 7-7-7"></path>
+                    <path d="m19 12 7-7-7-7"></path>
+                </svg>
+                Recyclable
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20"></path>
+                    <path d="M12 2a14.5 14.5 0 0 1 0 20"></path>
+                    <path d="M2 12h20"></path>
+                </svg>
+                Ethical Sourcing
+            </div>
         </div>
     </section>
 
-    <section class="whatsapp-connect">
-        <h2>Connect On Whatsapp</h2>
-        <p>Have a quick question or need immediate assistance? Chat with us directly on WhatsApp!</p>
-        <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn">
-            <img src="whatsapp-icon.png" alt="WhatsApp Icon">
-            Chat on WhatsApp
-        </a>
-    </section>
-
-    <section class="section">
-        <div class="connect-grid">
-            <div class="contact-form">
-                <h3>Get In Touch</h3>
-                <form action="https://formspree.io/f/your-endpoint" method="POST">
-                    <input type="text" name="name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <textarea name="message" placeholder="Message" rows="5" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-            <div class="social-media">
-                <h3>Follow Our Journey</h3>
-                <p>Stay updated with our latest products, tips, and news by connecting with us on social media.</p>
-                <div class="social-icons">
-                    <a target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                        href="https://instagram.com"
-                        style="background-color: #91ee91; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: box-shadow 0.2s;"
-                        onmouseover="this.style.boxShadow='0 0 0 4px #c6f9c6';"
-                        onmouseout="this.style.boxShadow='none';">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#244224" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram h-6 w-6">
-                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                        </svg>
-                    </a>
-                    <!-- 
-                    <a href="#" style="background-color: #91ee91; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: box-shadow 0.2s;"
-                        onmouseover="this.style.boxShadow='0 0 0 4px #c6f9c6';"
-                        onmouseout="this.style.boxShadow='none';">
-                        <img src="facebook-icon.png" alt="Facebook" style="width: 20px; height: 20px; filter: brightness(0) saturate(100%) invert(17%) sepia(14%) saturate(1167%) hue-rotate(74deg) brightness(92%) contrast(92%);">
-                    </a>
-                    -->
-                </div>
+    <section class="connect-section" id="connect">
+        <div class="contact-form">
+            <h3>Get In Touch</h3>
+            <form action="https://formspree.io/f/your-endpoint" method="POST">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <textarea name="message" placeholder="Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        <div class="connect-options">
+            <h3>Connect With Us</h3>
+            <form action="https://formspree.io/f/your-endpoint" method="POST" style="margin-bottom: 20px;">
+                <input type="email" name="email" placeholder="Email Address for Brochure" required>
+                <button type="submit">Request Brochure</button>
+            </form>
+            <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                Chat on WhatsApp
+            </a>
+            <h3 style="margin-top: 30px;">Follow Our Journey</h3>
+            <p style="text-align: center; margin-bottom: 20px;">Stay updated with our latest products and news.</p>
+            <div class="social-icons">
+                <a target="_blank" rel="noopener noreferrer" aria-label="Instagram" href="https://instagram.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
     <footer>
+        <div class="footer-logo">
+            <img src="leaf-icon.png" alt="Leaf Icon">
+            <span>Softleaf</span>
+        </div>
         <div class="footer-content">
-            <div class="logo">
-                <img src="leaf-icon.png" alt="Leaf Icon">
-                <span>Softleaf</span>
-            </div>
-            <p>© 2025 Softleaf. ALL RIGHTS RESERVED.</p>
+            <p>© 2025 Softleaf. All Rights Reserved.</p>
             <p>Crafted with care for a cleaner tomorrow.</p>
         </div>
     </footer>
