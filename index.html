@@ -398,7 +398,7 @@
         /* Footer */
         footer {
             padding: 20px;
-            background-color: #ebf4d7;
+            background-color: #ffffff; /* Updated to pure white */
             text-align: center;
         }
 
@@ -452,10 +452,15 @@
                 gap: 20px;
             }
 
-            /* Mobile styles for nav-links */
+            /* Mobile styles for nav-links and logo */
             .nav-container {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .logo {
+                justify-content: center; /* Center the logo on mobile */
+                width: 100%; /* Ensure it takes full width for centering */
             }
 
             .nav-links {
