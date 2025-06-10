@@ -62,6 +62,7 @@
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
         }
 
         .logo {
@@ -94,6 +95,18 @@
 
         .nav-links a:hover {
             color: var(--primary-green);
+        }
+
+        /* Hamburger Menu Icon */
+        .menu-icon {
+            display: none; /* Hidden by default on desktop */
+            cursor: pointer;
+        }
+
+        .menu-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--text-dark);
         }
 
         /* Hero Section */
@@ -398,7 +411,7 @@
         /* Footer */
         footer {
             padding: 20px;
-            background-color: #ffffff; /* Updated to pure white */
+            background-color: #ffffff;
             text-align: center;
         }
 
@@ -452,21 +465,37 @@
                 gap: 20px;
             }
 
-            /* Mobile styles for nav-links and logo */
+            /* Mobile styles for nav-links and menu */
             .nav-container {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; /* Change to row to place logo and menu icon side by side */
+                justify-content: space-between; /* Logo on left, menu icon on right */
+                align-items: center;
             }
 
             .logo {
-                justify-content: center; /* Center the logo on mobile */
-                width: 100%; /* Ensure it takes full width for centering */
+                justify-content: center;
+                width: auto; /* Reset width to fit content */
+            }
+
+            .menu-icon {
+                display: block; /* Show menu icon on mobile */
             }
 
             .nav-links {
+                display: none; /* Hidden by default on mobile */
                 flex-direction: column;
                 width: 100%;
-                margin-top: 15px;
+                position: absolute;
+                top: 100%; /* Position below the header */
+                left: 0;
+                background-color: var(--white);
+                box-shadow: 0 4px 10px var(--shadow);
+                padding: 10px 0;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when toggled */
             }
 
             .nav-links a {
@@ -494,7 +523,14 @@
                 <img src="leaf-icon.png" alt="Leaf Icon">
                 <span>Softleaf</span>
             </div>
-            <div class="nav-links">
+            <div class="menu-icon" onclick="toggleMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+                    <line x1="4" x2="20" y1="12" y2="12"></line>
+                    <line x1="4" x2="20" y1="6" y2="6"></line>
+                    <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+            </div>
+            <div class="nav-links" id="navLinks">
                 <a href="#products">Products</a>
                 <a href="#marketplace">Shop</a>
                 <a href="#connect">Connect</a>
@@ -687,5 +723,12 @@
             <p>Bringing Freshness and Purity to Homes and Hospitals Worldwide.</p>
         </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
