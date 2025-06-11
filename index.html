@@ -760,6 +760,23 @@
                 navLinks.classList.remove('active');
             });
         });
+
+document.getElementById('brochure-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = this.email.value;
+  // Replace YOUR_PROJECT_ID with your actual Firebase project ID
+  const response = await fetch('https://us-central1-softleaf-e7bba.cloudfunctions.net/sendBrochure', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email })
+  });
+  if (response.ok) {
+    alert('Brochure sent! Please check your email.');
+    this.reset();
+  } else {
+    alert('Failed to send brochure. Please try again.');
+  }
+});
     </script>
 </body>
 </html>
