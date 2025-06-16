@@ -212,6 +212,7 @@
             box-shadow: 0 4px 10px var(--shadow);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Indicate clickable */
         }
 
         .product-card:hover {
@@ -239,6 +240,126 @@
         .product-card-content p {
             font-size: 14px;
             color: #8B8589;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 4px 15px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-content img#modalImage {
+            width: 100%;
+            aspect-ratio: 3 / 2; /* Enforce 3:2 aspect ratio */
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .modal-content h3 {
+            font-family: 'Marcellus', serif;
+            font-size: 24px;
+            color: #708238;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+        }
+
+        .modal-content .price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .modal-content .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .modal-content .quantity label {
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .modal-content .quantity select {
+            padding: 8px;
+            border: 1px solid #E0E0E0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .modal-content .quantity .stamp-image {
+            height: 40px;
+            width: auto;
+            border-radius: 3px;
+            border: 1px solid #E0E0E0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Highlight style for the selected stamp image */
+        .modal-content .quantity .stamp-image.highlighted {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .modal-content .stock {
+            font-size: 14px;
+            color: #8B8589;
+            margin-bottom: 10px;
+        }
+
+        .modal-content .buy-now {
+            display: inline-block;
+            background-color: #FF9900; /* Amazon orange */
+            color: var(--white);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content .buy-now:hover {
+            background-color: #E68A00;
+        }
+
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
         }
 
         /* Marketplace Section */
@@ -556,6 +677,52 @@
                 background-color: var(--secondary-mint);
                 color: var(--primary-green);
             }
+
+            /* Modal adjustments for mobile */
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .modal-content img#modalImage {
+                /* Aspect ratio already set to 3:2, width will be 95% of modal */
+            }
+
+            .modal-content h3 {
+                font-size: 20px;
+            }
+
+            .modal-content p {
+                font-size: 14px;
+            }
+
+            .modal-content .price {
+                font-size: 16px;
+            }
+
+            .modal-content .quantity select {
+                font-size: 12px;
+                padding: 6px;
+            }
+
+            .modal-content .quantity .stamp-image {
+                height: 30px; /* Smaller stamp size on mobile */
+            }
+
+            .modal-content .quantity .stamp-image.highlighted {
+                /* Ensure highlight style is visible on mobile */
+                border-color: var(--primary-green);
+                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            }
+
+            .modal-content .stock {
+                font-size: 12px;
+            }
+
+            .modal-content .buy-now {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -594,42 +761,42 @@
     <section class="products-section" id="products">
         <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, stock: 50, amazon: '#amazon-product1-1ltr', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, stock: 20, amazon: '#amazon-product1-5ltr', stamp: 'product1.jpg' } })">
                 <img src="product1.jpg" alt="Pure Hands Handwash" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Pure Hands Handwash</h3>
                     <p>Gentle yet effective, infused with our signature fragrance.</p>
                 </div>
             </div>
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Shield+ Hand Sanitizer', 'Kills 99.9% of germs, perfect for on-the-go protection.', 'product2.jpg', true, { '1 ltr': { price: 349, stock: 40, amazon: '#amazon-product2-1ltr', stamp: 'product2a.jpg' }, '5 ltr': { price: 1499, stock: 15, amazon: '#amazon-product2-5ltr', stamp: 'product2.jpg' } })">
                 <img src="product2.jpg" alt="Shield+ Hand Sanitizer" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Shield+ Hand Sanitizer</h3>
                     <p>Kills 99.9% of germs, perfect for on-the-go protection.</p>
                 </div>
             </div>
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Sparkle All-Purpose Cleaner', 'Cuts through grease and grime on multiple surfaces.', 'product3.jpg', true, { '1 ltr': { price: 399, stock: 30, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, stock: 10, amazon: '#amazon-product3-5ltr', stamp: 'product3.jpg' } })">
                 <img src="product3.jpg" alt="Sparkle All-Purpose Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Sparkle All-Purpose Cleaner</h3>
                     <p>Cuts through grease and grime on multiple surfaces.</p>
                 </div>
             </div>
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Fresh Linen Fabric Refresher', 'Eliminates odors with a light, signature scent.', 'product4.jpg', true, { '1 ltr': { price: 329, stock: 35, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' }, '5 ltr': { price: 1399, stock: 12, amazon: '#amazon-product4-5ltr', stamp: 'product4.jpg' } })">
                 <img src="product4.jpg" alt="Fresh Linen Fabric Refresher" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Fresh Linen Fabric Refresher</h3>
                     <p>Eliminates odors with a light, signature scent.</p>
                 </div>
             </div>
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Crystal Clear Glass Cleaner', 'Streak-free shine for windows and mirrors.', 'product5.jpg', false, { '1 ltr': { price: 279, stock: 25, amazon: '#amazon-product5-1ltr', stamp: 'product5-1ltr.jpg' } })">
                 <img src="product5.jpg" alt="Crystal Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Crystal Clear Glass Cleaner</h3>
                     <p>Streak-free shine for windows and mirrors.</p>
                 </div>
             </div>
-            <div class="product-card">
+            <div class="product-card" onclick="showProductModal('Gentle Care Dish Soap', 'Tough on grease, gentle on hands.', 'product6.jpg', false, { '1 ltr': { price: 249, stock: 30, amazon: '#amazon-product6-1ltr', stamp: 'product6-1ltr.jpg' } })">
                 <img src="product6.jpg" alt="Gentle Care Dish Soap" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Gentle Care Dish Soap</h3>
@@ -674,7 +841,7 @@
                 Natural Ingredients
             </div>
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 -one 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package">
                     <path d="m7.5 4.27 9 5.15"></path>
                     <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
                     <path d="m3.3 7 8.7 5"></path>
@@ -765,7 +932,24 @@
         </div>
     </footer>
 
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeProductModal()">×</span>
+            <img id="modalImage" src="" alt="Product Image">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+            <div class="price" id="modalPrice"></div>
+            <div class="quantity" id="modalQuantity"></div>
+            <div class="stock" id="modalStock"></div>
+            <a id="modalBuyNow" href="#" class="buy-now">Buy Now on Amazon</a>
+        </div>
+    </div>
+
     <script>
+        // Global variable to store the current product's quantities
+        let currentProductQuantities = {};
+
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
@@ -778,6 +962,97 @@
                 navLinks.classList.remove('active');
             });
         });
+
+        // Product Modal Functionality
+        const modal = document.getElementById('productModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalQuantity = document.getElementById('modalQuantity');
+        const modalStock = document.getElementById('modalStock');
+        const modalBuyNow = document.getElementById('modalBuyNow');
+
+        function showProductModal(title, description, image, hasQuantityOptions, quantities) {
+            // Store the quantities in the global variable
+            currentProductQuantities = quantities;
+
+            // Populate modal with product details
+            modalImage.src = image;
+            modalImage.alt = title;
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+
+            if (hasQuantityOptions) {
+                // Products 1-4: Show dropdown for quantity options with stamp images
+                let selectHTML = '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
+                for (const size of Object.keys(quantities)) {
+                    selectHTML += `<option value="${size}">${size}</option>`;
+                }
+                selectHTML += '</select>';
+                selectHTML += '<div class="stamp-images">';
+                for (const [size, details] of Object.entries(quantities)) {
+                    selectHTML += `<img src="${details.stamp}" alt="${size}" class="stamp-image" data-size="${size}">`;
+                }
+                selectHTML += '</div>';
+                modalQuantity.innerHTML = selectHTML;
+
+                // Default to the first quantity option
+                const firstSize = Object.keys(quantities)[0];
+                modalPrice.textContent = `₹${quantities[firstSize].price}`;
+                modalStock.textContent = `In Stock: ${quantities[firstSize].stock} units`;
+                modalBuyNow.href = quantities[firstSize].amazon;
+
+                // Highlight the stamp image for the default quantity
+                highlightStampImage(firstSize);
+            } else {
+                // Products 5-6: Show static quantity (1 ltr) with stamp image
+                const size = Object.keys(quantities)[0];
+                modalQuantity.innerHTML = `<span>Quantity: ${size}</span><img src="${quantities[size].stamp}" alt="${size}" class="stamp-image">`;
+                modalPrice.textContent = `₹${quantities[size].price}`;
+                modalStock.textContent = `In Stock: ${quantities[size].stock} units`;
+                modalBuyNow.href = quantities[size].amazon;
+            }
+
+            // Show the modal
+            modal.style.display = 'flex';
+        }
+
+        function updateModalDetails(selectedSize) {
+            // Use the global currentProductQuantities
+            const quantities = currentProductQuantities;
+            modalPrice.textContent = `₹${quantities[selectedSize].price}`;
+            modalStock.textContent = `In Stock: ${quantities[selectedSize].stock} units`;
+            modalBuyNow.href = quantities[selectedSize].amazon;
+
+            // Highlight the corresponding stamp image
+            highlightStampImage(selectedSize);
+        }
+
+        function highlightStampImage(selectedSize) {
+            // Remove highlight from all stamp images
+            const stampImages = document.querySelectorAll('.stamp-image');
+            stampImages.forEach(img => img.classList.remove('highlighted'));
+
+            // Add highlight to the stamp image matching the selected size
+            const targetImage = document.querySelector(`.stamp-image[data-size="${selectedSize}"]`);
+            if (targetImage) {
+                targetImage.classList.add('highlighted');
+            }
+        }
+
+        function closeProductModal() {
+            modal.style.display = 'none';
+            // Clear the global quantities when closing the modal
+            currentProductQuantities = {};
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeProductModal();
+            }
+        };
     </script>
 </body>
 </html>
