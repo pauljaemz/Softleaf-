@@ -331,12 +331,6 @@
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
         }
 
-        .modal-content .stock {
-            font-size: 14px;
-            color: #8B8589;
-            margin-bottom: 10px;
-        }
-
         .modal-content .buy-now {
             display: inline-block;
             background-color: #FF9900; /* Amazon orange */
@@ -715,10 +709,6 @@
                 box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
             }
 
-            .modal-content .stock {
-                font-size: 12px;
-            }
-
             .modal-content .buy-now {
                 padding: 10px 20px;
                 font-size: 14px;
@@ -761,42 +751,42 @@
     <section class="products-section" id="products">
         <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, stock: 50, amazon: '#amazon-product1-1ltr', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, stock: 20, amazon: '#amazon-product1-5ltr', stamp: 'product1.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, amazon: '#amazon-product1-1ltr', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-product1-5ltr', stamp: 'product1.jpg' } })">
                 <img src="product1.jpg" alt="Pure Hands Handwash" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Pure Hands Handwash</h3>
                     <p>Gentle yet effective, infused with our signature fragrance.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Shield+ Hand Sanitizer', 'Kills 99.9% of germs, perfect for on-the-go protection.', 'product2.jpg', true, { '1 ltr': { price: 349, stock: 40, amazon: '#amazon-product2-1ltr', stamp: 'product2a.jpg' }, '5 ltr': { price: 1499, stock: 15, amazon: '#amazon-product2-5ltr', stamp: 'product2.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Shield+ Hand Sanitizer', 'Kills 99.9% of germs, perfect for on-the-go protection.', 'product2.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2a.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2.jpg' } })">
                 <img src="product2.jpg" alt="Shield+ Hand Sanitizer" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Shield+ Hand Sanitizer</h3>
                     <p>Kills 99.9% of germs, perfect for on-the-go protection.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Sparkle All-Purpose Cleaner', 'Cuts through grease and grime on multiple surfaces.', 'product3.jpg', true, { '1 ltr': { price: 399, stock: 30, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, stock: 10, amazon: '#amazon-product3-5ltr', stamp: 'product3.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Sparkle All-Purpose Cleaner', 'Cuts through grease and grime on multiple surfaces.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3.jpg' } })">
                 <img src="product3.jpg" alt="Sparkle All-Purpose Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Sparkle All-Purpose Cleaner</h3>
                     <p>Cuts through grease and grime on multiple surfaces.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Fresh Linen Fabric Refresher', 'Eliminates odors with a light, signature scent.', 'product4.jpg', true, { '1 ltr': { price: 329, stock: 35, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' }, '5 ltr': { price: 1399, stock: 12, amazon: '#amazon-product4-5ltr', stamp: 'product4.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Fresh Linen Fabric Refresher', 'Eliminates odors with a light, signature scent.', 'product4.jpg', true, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' }, '5 ltr': { price: 1399, amazon: '#amazon-product4-5ltr', stamp: 'product4.jpg' } })">
                 <img src="product4.jpg" alt="Fresh Linen Fabric Refresher" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Fresh Linen Fabric Refresher</h3>
                     <p>Eliminates odors with a light, signature scent.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Crystal Clear Glass Cleaner', 'Streak-free shine for windows and mirrors.', 'product5.jpg', false, { '1 ltr': { price: 279, stock: 25, amazon: '#amazon-product5-1ltr', stamp: 'product5-1ltr.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Crystal Clear Glass Cleaner', 'Streak-free shine for windows and mirrors.', 'product5.jpg', false, { '1 ltr': { price: 279, amazon: '#amazon-product5-1ltr', stamp: 'product5-1ltr.jpg' } })">
                 <img src="product5.jpg" alt="Crystal Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Crystal Clear Glass Cleaner</h3>
                     <p>Streak-free shine for windows and mirrors.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Gentle Care Dish Soap', 'Tough on grease, gentle on hands.', 'product6.jpg', false, { '1 ltr': { price: 249, stock: 30, amazon: '#amazon-product6-1ltr', stamp: 'product6-1ltr.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Gentle Care Dish Soap', 'Tough on grease, gentle on hands.', 'product6.jpg', false, { '1 ltr': { price: 249, amazon: '#amazon-product6-1ltr', stamp: 'product6-1ltr.jpg' } })">
                 <img src="product6.jpg" alt="Gentle Care Dish Soap" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Gentle Care Dish Soap</h3>
@@ -941,7 +931,6 @@
             <p id="modalDescription"></p>
             <div class="price" id="modalPrice"></div>
             <div class="quantity" id="modalQuantity"></div>
-            <div class="stock" id="modalStock"></div>
             <a id="modalBuyNow" href="#" class="buy-now">Buy Now on Amazon</a>
         </div>
     </div>
@@ -970,7 +959,6 @@
         const modalDescription = document.getElementById('modalDescription');
         const modalPrice = document.getElementById('modalPrice');
         const modalQuantity = document.getElementById('modalQuantity');
-        const modalStock = document.getElementById('modalStock');
         const modalBuyNow = document.getElementById('modalBuyNow');
 
         function showProductModal(title, description, image, hasQuantityOptions, quantities) {
@@ -1000,7 +988,6 @@
                 // Default to the first quantity option
                 const firstSize = Object.keys(quantities)[0];
                 modalPrice.textContent = `₹${quantities[firstSize].price}`;
-                modalStock.textContent = `In Stock: ${quantities[firstSize].stock} units`;
                 modalBuyNow.href = quantities[firstSize].amazon;
 
                 // Highlight the stamp image for the default quantity
@@ -1010,7 +997,6 @@
                 const size = Object.keys(quantities)[0];
                 modalQuantity.innerHTML = `<span>Quantity: ${size}</span><img src="${quantities[size].stamp}" alt="${size}" class="stamp-image">`;
                 modalPrice.textContent = `₹${quantities[size].price}`;
-                modalStock.textContent = `In Stock: ${quantities[size].stock} units`;
                 modalBuyNow.href = quantities[size].amazon;
             }
 
@@ -1022,7 +1008,6 @@
             // Use the global currentProductQuantities
             const quantities = currentProductQuantities;
             modalPrice.textContent = `₹${quantities[selectedSize].price}`;
-            modalStock.textContent = `In Stock: ${quantities[selectedSize].stock} units`;
             modalBuyNow.href = quantities[selectedSize].amazon;
 
             // Highlight the corresponding stamp image
