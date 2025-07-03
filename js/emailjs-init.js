@@ -28,11 +28,19 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             const name = contactForm.name.value;
             const email = contactForm.email.value;
+            const phone = contactForm.phone.value;
             const message = contactForm.message.value;
+
+            // Require at least email or phone
+            if (!email && !phone) {
+                alert("Please provide either an email address or a phone number.");
+                return;
+            }
 
             emailjs.send("service_y4wdacc", "template_panrlz9", {
                 from_name: name,
                 from_email: email,
+                phone: phone,
                 message: message
             })
             .then(function(response) {
