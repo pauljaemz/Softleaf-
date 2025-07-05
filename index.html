@@ -317,6 +317,11 @@
             color: var(--text-dark);
         }
 
+        .modal-content .quantity .stamp-images {
+            display: flex;
+            gap: 10px;
+        }
+
         .modal-content .quantity .stamp-image {
             height: 40px;
             width: auto;
@@ -752,67 +757,39 @@
     <section class="products-section" id="products">
         <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, amazon: '#amazon-product1-1ltr', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-product1-5ltr', stamp: 'product1.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, amazon: '#amazon-product1-1ltr', stamp: 'product1.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-product1-5ltr', stamp: 'product1a.jpg' } })">
                 <img src="product1.jpg" alt="Pure Hands Handwash" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Pure Hands Handwash</h3>
                     <p>Gentle yet effective, infused with our signature fragrance.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Shield+ Hand Sanitizer', 'Kills 99.9% of germs, perfect for on-the-go protection.', 'product2.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2a.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Shield+ Hand Sanitizer', 'Kills 99.9% of germs, perfect for on-the-go protection.', 'product2.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2a.jpg' } })">
                 <img src="product2.jpg" alt="Shield+ Hand Sanitizer" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Shield+ Hand Sanitizer</h3>
                     <p>Kills 99.9% of germs, perfect for on-the-go protection.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Sparkle All-Purpose Cleaner', 'Cuts through grease and grime on multiple surfaces.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Sparkle All-Purpose Cleaner', 'Cuts through grease and grime on multiple surfaces.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3a.jpg' } })">
                 <img src="product3.jpg" alt="Sparkle All-Purpose Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Sparkle All-Purpose Cleaner</h3>
                     <p>Cuts through grease and grime on multiple surfaces.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Fresh Linen Fabric Refresher', 'Eliminates odors with a light, signature scent.', 'product4.jpg', true, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' }, '5 ltr': { price: 1399, amazon: '#amazon-product4-5ltr', stamp: 'product4.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Fresh Linen Fabric Refresher', 'Eliminates odors with a light, signature scent.', 'product4.jpg', false, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4.jpg' } })">
                 <img src="product4.jpg" alt="Fresh Linen Fabric Refresher" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Fresh Linen Fabric Refresher</h3>
                     <p>Eliminates odors with a light, signature scent.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Crystal Clear Glass Cleaner', 'Streak-free shine for windows and mirrors.', 'product5.jpg', true, { '1 ltr': { price: 279, amazon: '#amazon-product5-1ltr', stamp: 'product5-1ltr.jpg' }, '5 ltr': { price: 1199, amazon: '#amazon-product5-5ltr', stamp: 'product5-5ltr.jpg' } })">
-                <img src="product5.jpg" alt="Crystal Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
+            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' }, image: 'product5.jpg' }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' }, image: 'product6.jpg' }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' }, image: 'product7.jpg' }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' }, image: 'product8.jpg' }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' }, image: 'product9.jpg' } })">
+                <img src="combined-floor-cleaners.jpg" alt="Floor Cleaner Collection" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
-                    <h3>Crystal Clear Glass Cleaner</h3>
-                    <p>Streak-free shine for windows and mirrors.</p>
-                </div>
-            </div>
-            <div class="product-card" onclick="showProductModal('Gentle Care Dish Soap', 'Tough on grease, gentle on hands.', 'product6.jpg', true, { '1 ltr': { price: 249, amazon: '#amazon-product6-1ltr', stamp: 'product6-1ltr.jpg' }, '5 ltr': { price: 1099, amazon: '#amazon-product6-5ltr', stamp: 'product6-5ltr.jpg' } })">
-                <img src="product6.jpg" alt="Gentle Care Dish Soap" onerror="this.src='placeholder.jpg'">
-                <div class="product-card-content">
-                    <h3>Gentle Care Dish Soap</h3>
-                    <p>Tough on grease, gentle on hands.</p>
-                </div>
-            </div>
-            <div class="product-card" onclick="showProductModal('Lavender Bliss Air Freshener', 'Infuses spaces with a calming lavender scent.', 'product7.jpg', true, { '1 ltr': { price: 299, amazon: '#amazon-product7-1ltr', stamp: 'product7a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-product7-5ltr', stamp: 'product7.jpg' } })">
-                <img src="product7.jpg" alt="Lavender Bliss Air Freshener" onerror="this.src='placeholder.jpg'">
-                <div class="product-card-content">
-                    <h3>Lavender Bliss Air Freshener</h3>
-                    <p>Infuses spaces with a calming lavender scent.</p>
-                </div>
-            </div>
-            <div class="product-card" onclick="showProductModal('Citrus Burst Surface Spray', 'Revitalizes surfaces with a zesty citrus aroma.', 'product8.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product8-1ltr', stamp: 'product8a.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product8-5ltr', stamp: 'product8.jpg' } })">
-                <img src="product8.jpg" alt="Citrus Burst Surface Spray" onerror="this.src='placeholder.jpg'">
-                <div class="product-card-content">
-                    <h3>Citrus Burst Surface Spray</h3>
-                    <p>Revitalizes surfaces with a zesty citrus aroma.</p>
-                </div>
-            </div>
-            <div class="product-card" onclick="showProductModal('Mint Renewal Floor Cleaner', 'Leaves floors refreshed with a minty finish.', 'product9.jpg', true, { '1 ltr': { price: 319, amazon: '#amazon-product9-1ltr', stamp: 'product9a.jpg' }, '5 ltr': { price: 1399, amazon: '#amazon-product9-5ltr', stamp: 'product9.jpg' } })">
-                <img src="product9.jpg" alt="Mint Renewal Floor Cleaner" onerror="this.src='placeholder.jpg'">
-                <div class="product-card-content">
-                    <h3>Mint Renewal Floor Cleaner</h3>
-                    <p>Leaves floors refreshed with a minty finish.</p>
+                    <h3>Floor Cleaner Collection</h3>
+                    <p>A range of floor cleaners with unique fragrances for a refreshed home.</p>
                 </div>
             </div>
             <div class="product-card" onclick="showProductModal('Eucalyptus Vitality Spray', 'Energizes with a crisp eucalyptus scent.', 'product10.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product10a.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product10.jpg' } })">
@@ -1009,28 +986,55 @@
             modalDescription.textContent = description;
 
             if (hasQuantityOptions) {
-                // Products 1-4: Show dropdown for quantity options with stamp images
-                let selectHTML = '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
-                for (const size of Object.keys(quantities)) {
-                    selectHTML += `<option value="${size}">${size}</option>`;
-                }
-                selectHTML += '</select>';
-                selectHTML += '<div class="stamp-images">';
-                for (const [size, details] of Object.entries(quantities)) {
-                    selectHTML += `<img src="${details.stamp}" alt="${size}" class="stamp-image" data-size="${size}">`;
-                }
-                selectHTML += '</div>';
-                modalQuantity.innerHTML = selectHTML;
+                if (title === 'Floor Cleaner Collection') {
+                    let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFloorCleanerDetails(this.value)">';
+                    for (const fragrance of Object.keys(quantities)) {
+                        selectHTML += `<option value="${fragrance}">${fragrance}</option>`;
+                    }
+                    selectHTML += '</select>';
+                    selectHTML += '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
+                    const firstFragrance = Object.keys(quantities)[0];
+                    for (const size of ['1 ltr', '5 ltr']) {
+                        selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
+                    }
+                    selectHTML += '</select>';
+                    selectHTML += '<div class="stamp-images">';
+                    selectHTML += `<img src="${quantities[firstFragrance]['1 ltr'].stamp}" alt="1 ltr Stamp" class="stamp-image" data-size="1 ltr">`;
+                    selectHTML += `<img src="${quantities[firstFragrance]['5 ltr'].stamp}" alt="5 ltr Stamp" class="stamp-image" data-size="5 ltr">`;
+                    selectHTML += '</div>';
+                    modalQuantity.innerHTML = selectHTML;
 
-                // Default to the first quantity option
-                const firstSize = Object.keys(quantities)[0];
-                modalPrice.textContent = `₹${quantities[firstSize].price}`;
-                modalBuyNow.href = quantities[firstSize].amazon;
+                    // Default to the first fragrance's specific image
+                    const defaultFragrance = Object.keys(quantities)[0];
+                    modalImage.src = quantities[defaultFragrance].image; // Use fragrance-specific image
+                    modalImage.alt = `${defaultFragrance} Image`;
+                    modalPrice.textContent = `₹${quantities[defaultFragrance]['1 ltr'].price}`;
+                    modalBuyNow.href = quantities[defaultFragrance]['1 ltr'].amazon;
+                    highlightStampImage(defaultFragrance, '1 ltr');
+                } else {
+                    // Other products with simple quantity selection
+                    let selectHTML = '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
+                    for (const size of Object.keys(quantities)) {
+                        selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
+                    }
+                    selectHTML += '</select>';
+                    selectHTML += '<div class="stamp-images">';
+                    for (const [size, details] of Object.entries(quantities)) {
+                        selectHTML += `<img src="${details.stamp}" alt="${size}" class="stamp-image" data-size="${size}">`;
+                    }
+                    selectHTML += '</div>';
+                    modalQuantity.innerHTML = selectHTML;
 
-                // Highlight the stamp image for the default quantity
-                highlightStampImage(firstSize);
+                    // Default to the first quantity option
+                    const firstSize = Object.keys(quantities)[0];
+                    modalPrice.textContent = `₹${quantities[firstSize].price}`;
+                    modalBuyNow.href = quantities[firstSize].amazon;
+
+                    // Highlight the stamp image for the default quantity
+                    highlightStampImage(null, firstSize);
+                }
             } else {
-                // Products 5-6: Show static quantity (1 ltr) with stamp image
+                // Products without quantity options (e.g., Fresh Linen Fabric Refresher)
                 const size = Object.keys(quantities)[0];
                 modalQuantity.innerHTML = `<span>Quantity: ${size}</span><img src="${quantities[size].stamp}" alt="${size}" class="stamp-image">`;
                 modalPrice.textContent = `₹${quantities[size].price}`;
@@ -1041,23 +1045,67 @@
             modal.style.display = 'flex';
         }
 
-        function updateModalDetails(selectedSize) {
-            // Use the global currentProductQuantities
-            const quantities = currentProductQuantities;
-            modalPrice.textContent = `₹${quantities[selectedSize].price}`;
-            modalBuyNow.href = quantities[selectedSize].amazon;
+        function updateFloorCleanerDetails(selectedFragrance) {
+            const quantities = currentProductQuantities[selectedFragrance];
+            let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFloorCleanerDetails(this.value)">';
+            for (const fragrance of Object.keys(currentProductQuantities)) {
+                selectHTML += `<option value="${fragrance}" ${fragrance === selectedFragrance ? 'selected' : ''}>${fragrance}</option>`;
+            }
+            selectHTML += '</select>';
+            selectHTML += '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
+            for (const size of ['1 ltr', '5 ltr']) {
+                selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
+            }
+            selectHTML += '</select>';
+            selectHTML += '<div class="stamp-images">';
+            selectHTML += `<img src="${quantities['1 ltr'].stamp}" alt="1 ltr Stamp" class="stamp-image" data-size="1 ltr">`;
+            selectHTML += `<img src="${quantities['5 ltr'].stamp}" alt="5 ltr Stamp" class="stamp-image" data-size="5 ltr">`;
+            selectHTML += '</div>';
+            modalQuantity.innerHTML = selectHTML;
 
-            // Highlight the corresponding stamp image
-            highlightStampImage(selectedSize);
+            // Update main image with the selected fragrance's specific image
+            modalImage.src = quantities.image; // Use fragrance-specific image
+            modalImage.alt = `${selectedFragrance} Image`;
+            modalPrice.textContent = `₹${quantities['1 ltr'].price}`;
+            modalBuyNow.href = quantities['1 ltr'].amazon;
+            highlightStampImage(selectedFragrance, '1 ltr');
         }
 
-        function highlightStampImage(selectedSize) {
+        function updateModalDetails(selectedSize) {
+            const quantities = currentProductQuantities;
+            let price, amazon;
+            if (modalTitle.textContent === 'Floor Cleaner Collection') {
+                const selectedFragrance = document.getElementById('fragranceSelect').value;
+                price = quantities[selectedFragrance][selectedSize].price;
+                amazon = quantities[selectedFragrance][selectedSize].amazon;
+                modalPrice.textContent = `₹${price}`;
+                modalBuyNow.href = amazon;
+                highlightStampImage(selectedFragrance, selectedSize);
+            } else {
+                price = quantities[selectedSize].price;
+                amazon = quantities[selectedSize].amazon;
+                const stampImages = document.querySelectorAll('.stamp-image');
+                stampImages.forEach(img => {
+                    if (img.getAttribute('data-size') === selectedSize) {
+                        img.classList.add('highlighted');
+                    } else {
+                        img.classList.remove('highlighted');
+                    }
+                });
+                modalPrice.textContent = `₹${price}`;
+                modalBuyNow.href = amazon;
+            }
+        }
+
+        function highlightStampImage(fragrance, selectedSize) {
             // Remove highlight from all stamp images
             const stampImages = document.querySelectorAll('.stamp-image');
             stampImages.forEach(img => img.classList.remove('highlighted'));
 
             // Add highlight to the stamp image matching the selected size
-            const targetImage = document.querySelector(`.stamp-image[data-size="${selectedSize}"]`);
+            const targetImage = fragrance
+                ? document.querySelector(`.stamp-image[data-size="${selectedSize}"]`)
+                : document.querySelector(`.stamp-image[data-size="${selectedSize}"]`);
             if (targetImage) {
                 targetImage.classList.add('highlighted');
             }
