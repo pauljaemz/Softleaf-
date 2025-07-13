@@ -472,6 +472,74 @@
             gap: 15px;
         }
 
+        .product-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .product-row select {
+            padding: 10px;
+            border: 2px solid #D8EDDD;
+            border-radius: 5px;
+            font-size: 14px;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234CAF50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .product-row select:hover,
+        .product-row select:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+            outline: none;
+        }
+
+        .product-counter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-counter button {
+            background-color: #D8EDDD;
+            border: 1px solid #A8C7AF;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-counter button:hover {
+            background-color: #C4E3CB;
+        }
+
+        .product-counter input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 2px solid #D8EDDD;
+            border-radius: 5px;
+            font-size: 14px;
+            color: var(--text-dark);
+            background-color: var(--white);
+            appearance: textfield; /* Remove default arrows */
+            -moz-appearance: textfield; /* Firefox */
+            -webkit-appearance: none; /* Webkit browsers */
+        }
+
+        .product-counter input::-webkit-inner-spin-button,
+        .product-counter input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         input, textarea {
             padding: 12px;
             border: 1px solid #E0E0E0;
@@ -718,6 +786,22 @@
                 padding: 10px 20px;
                 font-size: 14px;
             }
+
+            .product-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .product-counter button {
+                padding: 4px 8px;
+                font-size: 14px;
+            }
+
+            .product-counter input {
+                width: 40px;
+                padding: 4px;
+                font-size: 12px;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -748,8 +832,8 @@
         <div class="hero-content">
             <img src="leaf-icon.png" alt="Softleaf Logo" class="hero-logo">
             <h1>Softleaf</h1>
-            <h2>For Homes That Hug You Back</h2>
-            <p>Discover unique fragrances for sustainable hygiene. Experience the unique fragrance that sets us apart, ensuring a clean and fresh environment globally.</p>
+            <h2>Clean Spaces Clear Mind</h2>
+            <p>At Softleaf, we blend sustainable care with nature-inspired scents to create fresh, comforting homes you’ll love coming back to.</p>
             <a href="#products" class="cta-btn">Explore Products</a>
         </div>
     </section>
@@ -757,21 +841,21 @@
     <section class="products-section" id="products">
         <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { '1 ltr': { price: 299, amazon: '#amazon-product1-1ltr', stamp: 'product1.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-product1-5ltr', stamp: 'product1a.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Pure Hands Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { 'Lavender Bliss': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-lavender', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-lavender', stamp: 'product1.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-citrus', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-citrus', stamp: 'product1.jpg' } } })">
                 <img src="product1.jpg" alt="Pure Hands Handwash" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
-                    <h3>Pure Hands Handwash</h3>
+                    <h3>Softleaf Handwash</h3>
                     <p>Gentle yet effective, infused with our signature fragrance.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Citrus Dish Gel', 'Kills 99.9% of germs, Tough on grease, kind to hands.', 'product2.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2a.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Citrus Dish Gel', 'Kills 99.9% of germs, Tough on grease, kind to hands.', 'product2.jpg', true, { '1 ltr': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2a.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2.jpg' } })">
                 <img src="product2.jpg" alt="Citrus Dish Gel" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
-                    <h3>Citrus Dish Gel</h3>
+                    <h3>Manual Dish Wash Gel</h3>
                     <p>Kills 99.9% of germs, Tough on grease, kind to hands.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('All-Purpose Disinfectant', 'Kills germs, keeps surfaces safe.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3a.jpg' } })">
+            <div class="product-card" onclick="showProductModal('All-Purpose Disinfectant', 'Kills germs, keeps surfaces safe.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3.jpg' } })">
                 <img src="product3.jpg" alt="All-Purpose Disinfectant" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>All-Purpose Disinfectant</h3>
@@ -785,7 +869,7 @@
                     <p>Streak-free shine for a crystal-clear finish.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' }, image: 'product5.jpg' }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' }, image: 'product6.jpg' }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' }, image: 'product7.jpg' }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' }, image: 'product8.jpg' }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' }, image: 'product9.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' } }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' } }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' } }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' } } })">
                 <img src="combined-floor-cleaners.jpg" alt="Floor Cleaner Collection" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Floor Cleaner Collection</h3>
@@ -889,6 +973,31 @@
                 <input type="text" name="name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email Address">
                 <input type="tel" name="phone" placeholder="Phone Number">
+                <div id="product-fields">
+                    <div class="product-row">
+                        <select name="product[]" required onchange="checkSelections(this)">
+                            <option value="" disabled selected>Select a Product</option>
+                            <option value="Softleaf Handwash">Softleaf Handwash</option>
+                            <option value="Manual Dish Wash Gel">Manual Dish Wash Gel</option>
+                            <option value="All-Purpose Disinfectant">All-Purpose Disinfectant</option>
+                            <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
+                            <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
+                            <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
+                            <option value="Pure Phenol">Pure Phenol</option>
+                        </select>
+                        <select name="quantity[]" required onchange="checkSelections(this)">
+                            <option value="" disabled selected>Select Quantity</option>
+                            <option value="1 ltr">1 ltr</option>
+                            <option value="5 ltr">5 ltr</option>
+                        </select>
+                        <div class="product-counter">
+                            <button type="button" onclick="updateCounter(this, -1)" disabled>-</button>
+                            <input type="number" name="numberNeeded[]" value="1" min="1" max="20" readonly disabled>
+                            <button type="button" onclick="updateCounter(this, 1)" disabled>+</button>
+                        </div>
+                        <button type="button" onclick="addProductField()">+ Add Product</button>
+                    </div>
+                </div>
                 <textarea name="message" placeholder="Message" rows="5" required></textarea>
                 <button type="submit">Send Message</button>
             </form>
@@ -932,7 +1041,7 @@
         </div>
         <div class="footer-content">
             <p>© 2025 Softleaf. All Rights Reserved.</p>
-            <p>For Homes That Hug You Back.</p>
+            <p>Clean Spaces, Clear Mind.</p>
             <p>Thrissur, Kerala, India</p>
         </div>
     </footer>
@@ -977,18 +1086,16 @@
         const modalBuyNow = document.getElementById('modalBuyNow');
 
         function showProductModal(title, description, image, hasQuantityOptions, quantities) {
-            // Store the quantities in the global variable
             currentProductQuantities = quantities;
 
-            // Populate modal with product details
             modalImage.src = image;
             modalImage.alt = title;
             modalTitle.textContent = title;
             modalDescription.textContent = description;
 
             if (hasQuantityOptions) {
-                if (title === 'Floor Cleaner Collection') {
-                    let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFloorCleanerDetails(this.value)">';
+                if (title === 'Pure Hands Handwash' || title === 'Floor Cleaner Collection') {
+                    let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFragranceDetails(this.value)">';
                     for (const fragrance of Object.keys(quantities)) {
                         selectHTML += `<option value="${fragrance}">${fragrance}</option>`;
                     }
@@ -1005,15 +1112,13 @@
                     selectHTML += '</div>';
                     modalQuantity.innerHTML = selectHTML;
 
-                    // Default to the first fragrance's specific image
                     const defaultFragrance = Object.keys(quantities)[0];
-                    modalImage.src = quantities[defaultFragrance].image; // Use fragrance-specific image
-                    modalImage.alt = `${defaultFragrance} Image`;
+                    modalImage.src = quantities[defaultFragrance]['1 ltr'].stamp;
+                    modalImage.alt = `${defaultFragrance} ${'1 ltr'} Image`;
                     modalPrice.textContent = `₹${quantities[defaultFragrance]['1 ltr'].price}`;
                     modalBuyNow.href = quantities[defaultFragrance]['1 ltr'].amazon;
                     highlightStampImage(defaultFragrance, '1 ltr');
                 } else {
-                    // Other products with simple quantity selection
                     let selectHTML = '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
                     for (const size of Object.keys(quantities)) {
                         selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
@@ -1026,29 +1131,25 @@
                     selectHTML += '</div>';
                     modalQuantity.innerHTML = selectHTML;
 
-                    // Default to the first quantity option
                     const firstSize = Object.keys(quantities)[0];
+                    modalImage.src = quantities[firstSize].stamp;
                     modalPrice.textContent = `₹${quantities[firstSize].price}`;
                     modalBuyNow.href = quantities[firstSize].amazon;
-
-                    // Highlight the stamp image for the default quantity
                     highlightStampImage(null, firstSize);
                 }
             } else {
-                // Products without quantity options (e.g., Fresh Linen Fabric Refresher)
                 const size = Object.keys(quantities)[0];
                 modalQuantity.innerHTML = `<span>Quantity: ${size}</span><img src="${quantities[size].stamp}" alt="${size}" class="stamp-image">`;
                 modalPrice.textContent = `₹${quantities[size].price}`;
                 modalBuyNow.href = quantities[size].amazon;
             }
 
-            // Show the modal
             modal.style.display = 'flex';
         }
 
-        function updateFloorCleanerDetails(selectedFragrance) {
+        function updateFragranceDetails(selectedFragrance) {
             const quantities = currentProductQuantities[selectedFragrance];
-            let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFloorCleanerDetails(this.value)">';
+            let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFragranceDetails(this.value)">';
             for (const fragrance of Object.keys(currentProductQuantities)) {
                 selectHTML += `<option value="${fragrance}" ${fragrance === selectedFragrance ? 'selected' : ''}>${fragrance}</option>`;
             }
@@ -1064,9 +1165,8 @@
             selectHTML += '</div>';
             modalQuantity.innerHTML = selectHTML;
 
-            // Update main image with the selected fragrance's specific image
-            modalImage.src = quantities.image; // Use fragrance-specific image
-            modalImage.alt = `${selectedFragrance} Image`;
+            modalImage.src = quantities['1 ltr'].stamp;
+            modalImage.alt = `${selectedFragrance} ${'1 ltr'} Image`;
             modalPrice.textContent = `₹${quantities['1 ltr'].price}`;
             modalBuyNow.href = quantities['1 ltr'].amazon;
             highlightStampImage(selectedFragrance, '1 ltr');
@@ -1074,17 +1174,22 @@
 
         function updateModalDetails(selectedSize) {
             const quantities = currentProductQuantities;
-            let price, amazon;
-            if (modalTitle.textContent === 'Floor Cleaner Collection') {
+            let price, amazon, image;
+            if (modalTitle.textContent === 'Pure Hands Handwash' || modalTitle.textContent === 'Floor Cleaner Collection') {
                 const selectedFragrance = document.getElementById('fragranceSelect').value;
                 price = quantities[selectedFragrance][selectedSize].price;
                 amazon = quantities[selectedFragrance][selectedSize].amazon;
+                image = quantities[selectedFragrance][selectedSize].stamp;
+                modalImage.src = image;
+                modalImage.alt = `${selectedFragrance} ${selectedSize} Image`;
                 modalPrice.textContent = `₹${price}`;
                 modalBuyNow.href = amazon;
                 highlightStampImage(selectedFragrance, selectedSize);
             } else {
                 price = quantities[selectedSize].price;
                 amazon = quantities[selectedSize].amazon;
+                image = quantities[selectedSize].stamp;
+                modalImage.src = image;
                 const stampImages = document.querySelectorAll('.stamp-image');
                 stampImages.forEach(img => {
                     if (img.getAttribute('data-size') === selectedSize) {
@@ -1099,11 +1204,9 @@
         }
 
         function highlightStampImage(fragrance, selectedSize) {
-            // Remove highlight from all stamp images
             const stampImages = document.querySelectorAll('.stamp-image');
             stampImages.forEach(img => img.classList.remove('highlighted'));
 
-            // Add highlight to the stamp image matching the selected size
             const targetImage = fragrance
                 ? document.querySelector(`.stamp-image[data-size="${selectedSize}"]`)
                 : document.querySelector(`.stamp-image[data-size="${selectedSize}"]`);
@@ -1114,16 +1217,79 @@
 
         function closeProductModal() {
             modal.style.display = 'none';
-            // Clear the global quantities when closing the modal
             currentProductQuantities = {};
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target === modal) {
                 closeProductModal();
             }
         };
+
+        // Contact Form Product Fields
+        function addProductField() {
+            const productFields = document.getElementById('product-fields');
+            const rows = productFields.getElementsByClassName('product-row');
+            if (rows.length >= 6) {
+                alert('You can only add up to 6 products.');
+                return;
+            }
+            const newRow = document.createElement('div');
+            newRow.className = 'product-row';
+            newRow.innerHTML = `
+                <select name="product[]" required onchange="checkSelections(this)">
+                    <option value="" disabled selected>Select a Product</option>
+                    <option value="Softleaf Handwash">Softleaf Handwash</option>
+                    <option value="Manual Dish Wash Gel">Manual Dish Wash Gel</option>
+                    <option value="All-Purpose Disinfectant">All-Purpose Disinfectant</option>
+                    <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
+                    <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
+                    <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
+                    <option value="Pure Phenol">Pure Phenol</option>
+                </select>
+                <select name="quantity[]" required onchange="checkSelections(this)">
+                    <option value="" disabled selected>Select Quantity</option>
+                    <option value="1 ltr">1 ltr</option>
+                    <option value="5 ltr">5 ltr</option>
+                </select>
+                <div class="product-counter">
+                    <button type="button" onclick="updateCounter(this, -1)" disabled>-</button>
+                    <input type="number" name="numberNeeded[]" value="1" min="1" max="20" readonly disabled>
+                    <button type="button" onclick="updateCounter(this, 1)" disabled>+</button>
+                </div>
+                <button type="button" onclick="this.parentElement.remove()">- Remove</button>
+            `;
+            productFields.appendChild(newRow);
+        }
+
+        function updateCounter(button, change) {
+            const counter = button.closest('.product-counter');
+            const input = counter.querySelector('input[name="numberNeeded[]"]');
+            const buttons = counter.querySelectorAll('button');
+            let value = parseInt(input.value);
+            value += change;
+            if (value < 1) value = 1;
+            if (value > 20) value = 20;
+            input.value = value;
+        }
+
+        function checkSelections(select) {
+            const row = select.closest('.product-row');
+            const productSelect = row.querySelector('select[name="product[]"]');
+            const quantitySelect = row.querySelector('select[name="quantity[]"]');
+            const counter = row.querySelector('.product-counter');
+            const input = counter.querySelector('input[name="numberNeeded[]"]');
+            const buttons = counter.querySelectorAll('button');
+
+            if (productSelect.value && quantitySelect.value) {
+                input.disabled = false;
+                buttons.forEach(button => button.disabled = false);
+            } else {
+                input.disabled = true;
+                buttons.forEach(button => button.disabled = true);
+                input.value = 1; // Reset to 1 if either is deselected
+            }
+        }
     </script>
     <script src="js/emailjs-init.js"></script>
 </body>
