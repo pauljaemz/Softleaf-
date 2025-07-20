@@ -833,6 +833,12 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        // Redirect non-www to www
+        if (window.location.hostname === 'softleaf.co') {
+            window.location.href = 'https://www.softleaf.co' + window.location.pathname;
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -1093,41 +1099,28 @@
             emailjs.init("hBWhln6TAGQWZhU3N"); // Your EmailJS public key
         })();
 
+        let isContactFormSubmitting = false;
+        let isBrochureFormSubmitting = false;
+
         document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById("brochure-form");
-            form.addEventListener("submit", function(e) {
-                e.preventDefault();
-                const email = form.email.value;
-
-                // Send email using EmailJS
-                emailjs.send("service_y4wdacc", "template_r9zl5on", {
-                    to_email: email,
-                })
-                .then(function(response) {
-                    alert("Brochure sent! Please check your email.");
-                    form.reset();
-                }, function(error) {
-                    alert("Failed to send brochure. Please try again later.");
-                });
-            });
-
-            // Contact form handler
             const contactForm = document.getElementById("contact-form");
             if (contactForm) {
                 contactForm.addEventListener("submit", function(e) {
                     e.preventDefault();
+                    if (isContactFormSubmitting) return;
+                    isContactFormSubmitting = true;
+
                     const name = contactForm.name.value;
                     const email = contactForm.email.value;
                     const phone = contactForm.phone.value;
                     const message = contactForm.message.value;
 
-                    // Require at least email or phone
                     if (!email && !phone) {
                         alert("Please provide either an email address or a phone number.");
+                        isContactFormSubmitting = false;
                         return;
                     }
 
-                    // Collect product information
                     let productDetails = [];
                     const productRows = contactForm.querySelectorAll('.product-row');
                     productRows.forEach(row => {
@@ -1149,8 +1142,33 @@
                     .then(function(response) {
                         alert("Message sent! We'll get back to you soon.");
                         contactForm.reset();
+                        isContactFormSubmitting = false;
                     }, function(error) {
                         alert("Failed to send message. Please try again later.");
+                        isContactFormSubmitting = false;
+                    });
+                });
+            }
+
+            const brochureForm = document.getElementById("brochure-form");
+            if (brochureForm) {
+                brochureForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    if (isBrochureFormSubmitting) return;
+                    isBrochureFormSubmitting = true;
+
+                    const email = brochureForm.email.value;
+
+                    emailjs.send("service_y4wdacc", "template_r9zl5on", {
+                        to_email: email,
+                    })
+                    .then(function(response) {
+                        alert("Brochure sent! Please check your email.");
+                        brochureForm.reset();
+                        isBrochureFormSubmitting = false;
+                    }, function(error) {
+                        alert("Failed to send brochure. Please try again later.");
+                        isBrochureFormSubmitting = false;
                     });
                 });
             }
