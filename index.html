@@ -74,6 +74,7 @@
         .logo {
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
 
         .logo img {
@@ -149,6 +150,7 @@
         .hero-logo {
             height: 80px;
             margin-bottom: 10px;
+            cursor: pointer;
         }
 
         .hero-content h1 {
@@ -477,10 +479,11 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            margin-bottom: 10px;
         }
 
         .product-row select {
-            padding: 10px;
+            padding: 8px;
             border: 2px solid #D8EDDD;
             border-radius: 5px;
             font-size: 14px;
@@ -491,6 +494,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234CAF50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 10px center;
+            flex: 1;
         }
 
         .product-row select:hover,
@@ -504,14 +508,15 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            flex: 0 0 auto;
         }
 
         .product-counter button {
             background-color: #D8EDDD;
             border: 1px solid #A8C7AF;
             border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 16px;
+            padding: 4px 8px;
+            font-size: 14px;
             color: var(--text-dark);
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -522,8 +527,8 @@
         }
 
         .product-counter input {
-            width: 50px;
-            padding: 5px;
+            width: 40px;
+            padding: 4px;
             text-align: center;
             border: 2px solid #D8EDDD;
             border-radius: 5px;
@@ -539,6 +544,22 @@
         .product-counter input::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+
+        .product-row button {
+            background-color: #D8EDDD;
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border: 1px solid #A8C7AF;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex: 0 0 auto;
+        }
+
+        .product-row button:hover {
+            background-color: #C4E3CB;
         }
 
         input, textarea {
@@ -791,16 +812,22 @@
             .product-row {
                 flex-direction: column;
                 gap: 5px;
+                align-items: stretch;
             }
 
             .product-counter button {
-                padding: 4px 8px;
-                font-size: 14px;
+                padding: 2px 6px;
+                font-size: 12px;
             }
 
             .product-counter input {
-                width: 40px;
-                padding: 4px;
+                width: 35px;
+                padding: 2px;
+                font-size: 12px;
+            }
+
+            .product-row button {
+                padding: 4px 8px;
                 font-size: 12px;
             }
         }
@@ -810,7 +837,7 @@
 <body>
     <nav>
         <div class="nav-container">
-            <div class="logo">
+            <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                 <img src="leaf-icon.png" alt="Leaf Icon">
                 <span>Softleaf</span>
             </div>
@@ -831,7 +858,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <img src="leaf-icon.png" alt="Softleaf Logo" class="hero-logo">
+            <img src="leaf-icon.png" alt="Softleaf Logo" class="hero-logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
             <h1>Softleaf</h1>
             <h2>Clean Spaces Clear Mind</h2>
             <p>At Softleaf, we blend sustainable care with nature-inspired scents to create fresh, comforting homes you’ll love coming back to.</p>
@@ -842,7 +869,7 @@
     <section class="products-section" id="products">
         <h2 class="section-title">Our Products</h2>
         <div class="product-grid">
-            <div class="product-card" onclick="showProductModal('Softleaf Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { 'Lavender Bliss': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-lavender', stamp: 'product1.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-lavender', stamp: 'product1a.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-citrus', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-citrus', stamp: 'product1.jpg' } } })">
+            <div class="product-card" onclick="showProductModal('Softleaf Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { 'Lavender Bliss': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-lavender', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-lavender', stamp: 'product1.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-citrus', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-citrus', stamp: 'product1.jpg' } } })">
                 <img src="product1.jpg" alt="Softleaf Handwash" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Softleaf Handwash</h3>
@@ -856,35 +883,35 @@
                     <p>Kills 99.9% of germs, Tough on grease, kind to hands.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('All-Purpose Disinfectant', 'Kills germs, keeps surfaces safe.', 'product3.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3a.jpg' } })">
+            <div class="product-card" onclick="showProductModal('All-Purpose Disinfectant', 'Kills germs, keeps surfaces safe.', 'product3a.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3a.jpg' } })">
                 <img src="product3.jpg" alt="All-Purpose Disinfectant" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>All-Purpose Disinfectant</h3>
                     <p>Kills germs, keeps surfaces safe.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Clear Glass Cleaner', 'Streak-free shine for a crystal-clear finish', 'product4.jpg', false, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Clear Glass Cleaner', 'Streak-free shine for a crystal-clear finish', 'product4a.jpg', false, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' } })">
                 <img src="product4.jpg" alt="Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Clear Glass Cleaner</h3>
                     <p>Streak-free shine for a crystal-clear finish.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' } }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' } }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' } }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' } } })">
+            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' } }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' } }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' } }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' } } })">
                 <img src="combined-floor-cleaners.jpg" alt="Floor Cleaner Collection" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Floor Cleaner Collection</h3>
                     <p>A range of floor cleaners with unique fragrances for a refreshed home.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Deep Toilet Cleaner', 'Deep clean with a refreshing aroma.', 'product10.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product10a.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product10.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Deep Toilet Cleaner', 'Deep clean with a refreshing aroma.', 'product10.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product10.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product10a.jpg' } })">
                 <img src="product10.jpg" alt="Deep Toilet Cleaner" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Deep Toilet Cleaner</h3>
                     <p>Deep clean with a refreshing aroma.</p>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Pure Phenyl', 'Powerful disinfection with a bold scent.', 'product11.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product11a.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product11.jpg' } })">
+            <div class="product-card" onclick="showProductModal('Pure Phenyl', 'Powerful disinfection with a bold scent.', 'product11.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product11.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product11a.jpg' } })">
                 <img src="product11.jpg" alt="Pure Phenyl" onerror="this.src='placeholder.jpg'">
                 <div class="product-card-content">
                     <h3>Pure Phenyl</h3>
@@ -984,7 +1011,7 @@
                             <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
                             <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
                             <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
-                            <option value="Pure Phenol">Pure Phenol</option>
+                            <option value="Pure Phenyl">Pure Phenyl</option>
                         </select>
                         <select name="quantity[]" required onchange="checkSelections(this)">
                             <option value="" disabled selected>Select Quantity</option>
@@ -1061,6 +1088,74 @@
     </div>
 
     <script>
+        // Initialize EmailJS (replace with your public key)
+        (function() {
+            emailjs.init("hBWhln6TAGQWZhU3N"); // Your EmailJS public key
+        })();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("brochure-form");
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const email = form.email.value;
+
+                // Send email using EmailJS
+                emailjs.send("service_y4wdacc", "template_r9zl5on", {
+                    to_email: email,
+                })
+                .then(function(response) {
+                    alert("Brochure sent! Please check your email.");
+                    form.reset();
+                }, function(error) {
+                    alert("Failed to send brochure. Please try again later.");
+                });
+            });
+
+            // Contact form handler
+            const contactForm = document.getElementById("contact-form");
+            if (contactForm) {
+                contactForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    const name = contactForm.name.value;
+                    const email = contactForm.email.value;
+                    const phone = contactForm.phone.value;
+                    const message = contactForm.message.value;
+
+                    // Require at least email or phone
+                    if (!email && !phone) {
+                        alert("Please provide either an email address or a phone number.");
+                        return;
+                    }
+
+                    // Collect product information
+                    let productDetails = [];
+                    const productRows = contactForm.querySelectorAll('.product-row');
+                    productRows.forEach(row => {
+                        const productSelect = row.querySelector('select[name="product[]"]');
+                        const quantitySelect = row.querySelector('select[name="quantity[]"]');
+                        const numberInput = row.querySelector('input[name="numberNeeded[]"]');
+                        if (productSelect.value && quantitySelect.value && numberInput.value) {
+                            productDetails.push(`- Product: ${productSelect.value}, Quantity: ${quantitySelect.value}, Number Needed: ${numberInput.value}`);
+                        }
+                    });
+                    const productMessage = productDetails.length > 0 ? `Product Details:\n${productDetails.join('\n')}\n\n` : '';
+
+                    emailjs.send("service_y4wdacc", "template_panrlz9", {
+                        from_name: name,
+                        from_email: email,
+                        phone: phone,
+                        message: productMessage + message
+                    })
+                    .then(function(response) {
+                        alert("Message sent! We'll get back to you soon.");
+                        contactForm.reset();
+                    }, function(error) {
+                        alert("Failed to send message. Please try again later.");
+                    });
+                });
+            }
+        });
+
         // Global variable to store the current product's quantities
         let currentProductQuantities = {};
 
@@ -1246,7 +1341,7 @@
                     <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
                     <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
                     <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
-                    <option value="Pure Phenol">Pure Phenol</option>
+                    <option value="Pure Phenyl">Pure Phenyl</option>
                 </select>
                 <select name="quantity[]" required onchange="checkSelections(this)">
                     <option value="" disabled selected>Select Quantity</option>
@@ -1260,7 +1355,7 @@
                 </div>
                 <button type="button" onclick="this.parentElement.remove()">- Remove</button>
             `;
-            productFields.appendChild(newRow);
+            productFields.insertBefore(newRow, productFields.firstChild); // Insert at the top
         }
 
         function updateCounter(button, change) {
