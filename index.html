@@ -836,7 +836,7 @@
     <script>
         // Redirect non-www to www
         if (window.location.hostname === 'softleaf.co') {
-            window.location.href = 'https://www.softleaf.co' + window.location.pathname;
+            document.write('<meta http-equiv="refresh" content="0;URL=\'https://www.softleaf.co\'" />');
         }
     </script>
 </head>
