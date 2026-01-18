@@ -4,62 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Softleaf - Global Hygiene & Cleaning Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
-    <style>
-        /* Smooth scrolling behavior */
-        html {
-            scroll-behavior: smooth;
-        }
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-        /* CSS Variables for Colors */
+    <style>
+        /* --- CSS Variables --- */
         :root {
             --primary-green: #4CAF50;
-            --secondary-mint: #D7EBD8;
-            --fragrance-cyan: #E0F7FA;
-            --accent-sage: #5E9F61;
+            --dark-green: #2E7D32;
+            --secondary-mint: #E8F5E9;
+            --accent-sage: #708238;
             --white: #FFFFFF;
             --text-dark: #1A1A1A;
-            --text-medium: #333333;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.2);
+            --text-grey: #555555;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px rgba(76, 175, 80, 0.15);
         }
 
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- Global Reset & Typography --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--white);
+            background-color: #F9FAFB;
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Explicitly set font-family for non-heading elements */
-        p, a, button, input, textarea, .commitment-icons div, .product-card h3 {
-            font-family: 'Inter', sans-serif;
-        }
+        h1, h2, h3, .brand-font { font-family: 'Marcellus', serif; }
+        
+        img { display: block; max-width: 100%; }
 
-        /* Since Inter import doesn't include weights 500 and 600, adjust elements to use 400 */
-        .nav-links a, .marketplace-links a, .whatsapp-btn, button, .product-card h3 {
-            font-weight: 400; /* Fallback to available weight */
-        }
-
-        /* Navigation */
+        /* --- Navigation (Glassmorphism) --- */
         nav {
-            position: sticky;
+            position: fixed; /* Fixed to stay on top while scrolling past full screen hero */
             top: 0;
             width: 100%;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px var(--shadow);
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
             padding: 15px 40px;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -68,791 +62,307 @@
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
-            position: relative;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
+        .logo { display: flex; align-items: center; cursor: pointer; gap: 10px; }
+        .logo img { height: 32px; }
+        .logo span { font-size: 26px; color: var(--accent-sage); font-weight: 400; }
 
-        .logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-
-        .logo span {
-            font-family: 'Marcellus', serif;
-            font-size: 28px;
-            color: #708238; /* Olive Green for headings */
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            margin-left: 20px;
             text-decoration: none;
             color: var(--text-dark);
-            transition: color 0.3s ease, background-color 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
         }
-
-        .nav-links a:hover {
-            color: var(--primary-green);
+        .nav-links a:hover { color: var(--primary-green); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: var(--primary-green);
+            transition: width 0.3s;
         }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* Hamburger Menu Icon */
-        .menu-icon {
-            display: none; /* Hidden by default on desktop */
-            cursor: pointer;
-        }
+        .menu-icon { display: none; cursor: pointer; }
 
-        .menu-icon svg {
-            width: 30px;
-            height: 30px;
-            color: var(--text-dark);
-        }
-
-        /* Hero Section */
+        /* --- Hero Section --- */
         .hero {
             position: relative;
-            height: 80vh;
-            background: linear-gradient(135deg, var(--secondary-mint) 0%, var(--fragrance-cyan) 100%);
+            height: 100vh; /* Occupy full viewport height */
+            width: 100%;
+            background: linear-gradient(135deg, #e0f2f1 0%, #E8F5E9 100%);
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
+            justify-content: center;
             overflow: hidden;
+            padding: 20px;
+            /* Offset for fixed nav if needed, but centering usually looks best without offset */
         }
 
+        /* Decorative Background Pattern */
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,186.7C672,171,768,149,864,144C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.4)" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,186.7C672,171,768,149,864,144C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
             background-size: cover;
             z-index: 1;
+            pointer-events: none; /* Let clicks pass through */
         }
 
         .hero-content {
-            position: relative;
+            position: relative; 
             z-index: 2;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .hero-logo {
-            height: 80px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .hero-content h1 {
-            font-family: 'Marcellus', serif;
-            font-size: 52px;
-            color: #708238;
-            margin-bottom: 10px; /* Reduced margin to bring h2 closer */
-        }
-
-        .hero-content h2 {
-            font-family: 'Marcellus', serif;
-            font-size: 32px; /* Smaller than h1 to fit well */
-            color: #708238;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 18px;
-            color: var(--text-medium);
-            margin-bottom: 30px;
-        }
-
-        .hero-content .cta-btn {
-            background-color: #D8EDDD;
-            color: var(--text-dark);
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            border: 1px solid #A8C7AF;
-            transition: background-color 0.3s ease;
-        }
-
-        .hero-content .cta-btn:hover {
-            background-color: #C4E3CB;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Marcellus', serif;
-            font-size: 36px;
-            color: #708238;
+            max-width: 900px; 
+            padding: 20px; 
             text-align: center;
-            margin-bottom: 50px;
+            /* Removed box styling */
+            background: none;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
         }
+
+        .hero-content h1 { 
+            font-size: 5rem; 
+            color: var(--accent-sage); 
+            margin-bottom: 15px; 
+            line-height: 1.1; 
+        }
+        
+        .hero-content h2 { 
+            font-size: 2rem; 
+            color: var(--dark-green); 
+            margin-bottom: 25px; 
+            font-weight: 400; 
+        }
+        
+        .hero-content p { 
+            font-size: 1.25rem; 
+            color: var(--text-grey); 
+            margin-bottom: 45px; 
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            font-size: 1.1rem;
+        }
+        .cta-btn:hover { background-color: var(--dark-green); transform: translateY(-2px); }
+
+        /* --- Products Section --- */
+        .products-section { padding: 80px 40px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; color: var(--accent-sage); text-align: center; margin-bottom: 60px; }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
         }
 
         .product-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px var(--shadow);
+            background: var(--white);
+            border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; /* Indicate clickable */
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+            display: flex; flex-direction: column;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px var(--shadow-hover);
-        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
 
         .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+            width: 100%; height: 240px; object-fit: cover;
+            background-color: #f0f0f0; transition: transform 0.5s ease;
         }
+        .product-card:hover img { transform: scale(1.05); }
 
-        .product-card-content {
-            padding: 20px;
-            text-align: center;
-        }
+        .product-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .product-card-content h3 { font-size: 1.25rem; color: var(--text-dark); margin-bottom: 8px; }
+        .product-card-content p { font-size: 0.95rem; color: var(--text-grey); margin-bottom: 15px; }
+        
+        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+        .view-btn { font-size: 0.9rem; color: var(--primary-green); font-weight: 600; }
 
-        .product-card-content h3 {
-            font-family: 'Marcellus', serif;
-            color: #708238; /* Charcoal Gray */
-            font-weight: 800;
-        }
-
-        .product-card-content p {
-            font-size: 14px;
-            color: #8B8589;
-        }
-
-        /* Modal Styles */
+        /* --- Modal (Modern Grid) --- */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
+            z-index: 2000; padding: 20px; justify-content: center; align-items: center;
         }
 
         .modal-content {
             background-color: var(--white);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
-            padding: 20px;
+            border-radius: 24px;
+            width: 100%; max-width: 900px;
             position: relative;
-            box-shadow: 0 4px 15px var(--shadow);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .modal-content img#modalImage {
-            width: 100%;
-            aspect-ratio: 3 / 2; /* Enforce 3:2 aspect ratio */
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .modal-content h3 {
-            font-family: 'Marcellus', serif;
-            font-size: 24px;
-            color: #708238;
-            margin-bottom: 10px;
-        }
-
-        .modal-content p {
-            font-size: 16px;
-            color: var(--text-medium);
-            margin-bottom: 10px;
-        }
-
-        .modal-content .price {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-        }
-
-        .modal-content .quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .modal-content .quantity label {
-            font-size: 16px;
-            color: var(--text-dark);
-        }
-
-        .modal-content .quantity select {
-            padding: 8px;
-            border: 1px solid #E0E0E0;
-            border-radius: 5px;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-
-        .modal-content .quantity .stamp-images {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-content .quantity .stamp-image {
-            height: 40px;
-            width: auto;
-            border-radius: 3px;
-            border: 1px solid #E0E0E0;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Highlight style for the selected stamp image */
-        .modal-content .quantity .stamp-image.highlighted {
-            border-color: var(--primary-green);
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-        }
-
-        .modal-content .buy-now {
-            display: inline-block;
-            background-color: #FF9900; /* Amazon orange */
-            color: var(--white);
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .modal-content .buy-now:hover {
-            background-color: #E68A00;
-        }
-
-        .modal-content .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        /* Marketplace Section */
-        .marketplace-section {
-            padding: 60px 40px;
-            background-color: var(--secondary-mint);
-            text-align: center;
-        }
-
-        .marketplace-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .marketplace-links a {
-            display: inline-flex;
-            align-items: center;
-            background-color: #DCF2EB;
-            color: var(--text-dark);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            border: 1px solid #A8D5C7;
-            transition: background-color 0.3s ease;
-        }
-
-        .marketplace-links a svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-        }
-
-        .marketplace-links a:hover {
-            background-color: #C6E7DE;
-        }
-
-        /* Commitment Section */
-        .commitment-section {
-            padding: 60px 0;
-            background-color: #E1F5FE;
-            text-align: center;
-            width: 100%;
-        }
-
-        .commitment-section p {
-            font-size: 16px;
-            color: var(--text-medium);
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-
-        .commitment-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .commitment-icons div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-
-        .commitment-icons svg {
-            width: 40px;
-            height: 40px;
-            color: var(--primary-green);
-        }
-
-        /* Connect Section */
-        .connect-section {
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1fr; /* Split 50/50 */
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .contact-form, .connect-options {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px var(--shadow);
+        .modal-image-col img {
+            width: 100%; height: 100%; object-fit: cover; min-height: 300px;
         }
 
-        .connect-options {
-            background: linear-gradient(135deg, #E3F2E4 0%, #EBFAFC 100%);
+        .modal-details-col { padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+
+        .close-btn {
+            position: absolute; top: 20px; right: 20px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; z-index: 10;
         }
 
-        .connect-section h3 {
-            font-family: 'Marcellus', serif;
-            font-size: 28px;
-            color: #708238;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .modal-price { font-size: 2rem; font-weight: 600; color: var(--primary-green); font-family: 'Marcellus', serif; }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .product-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .product-row select {
-            padding: 8px;
-            border: 2px solid #D8EDDD;
-            border-radius: 5px;
-            font-size: 14px;
-            color: var(--text-dark);
-            background-color: var(--white);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234CAF50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            flex: 1;
-        }
-
-        .product-row select:hover,
-        .product-row select:focus {
-            border-color: var(--primary-green);
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-            outline: none;
-        }
-
-        .product-counter {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex: 0 0 auto;
-        }
-
-        .product-counter button {
-            background-color: #D8EDDD;
-            border: 1px solid #A8C7AF;
-            border-radius: 5px;
-            padding: 4px 8px;
-            font-size: 14px;
-            color: var(--text-dark);
+        /* Modal Form Elements */
+        .modal-options label { display: block; font-size: 0.9rem; color: #666; margin-bottom: 5px; }
+        .modal-options select {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;
+            background: #FAFAFA; font-family: inherit; margin-bottom: 15px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+        }
+        
+        .stamp-selector { display: flex; gap: 10px; margin-bottom: 20px; }
+        .stamp-image {
+            width: 50px; height: 50px; border-radius: 8px; border: 2px solid transparent;
+            cursor: pointer; object-fit: cover;
+        }
+        .stamp-image.active { border-color: var(--primary-green); box-shadow: 0 0 0 3px rgba(76,175,80,0.2); }
+
+        .buy-now-btn {
+            background-color: #FF9900; color: white; text-align: center;
+            padding: 15px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; transition: background 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .buy-now-btn:hover { background-color: #e68a00; }
+
+        /* --- Marketplace & Commitment --- */
+        .marketplace-section { padding: 80px 40px; background-color: var(--secondary-mint); text-align: center; }
+        .marketplace-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .marketplace-links a {
+            background: white; padding: 15px 30px; border-radius: 50px;
+            text-decoration: none; color: var(--text-dark); font-weight: 500;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s;
+        }
+        .marketplace-links a:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+
+        .commitment-section { padding: 80px 20px; text-align: center; background: white; }
+        .commitment-icons { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 40px; }
+        .commitment-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 120px; }
+        .commitment-item svg { color: var(--primary-green); width: 40px; height: 40px; }
+        .commitment-item span { font-size: 0.9rem; font-weight: 500; }
+
+        /* --- Connect Form --- */
+        .connect-section {
+            padding: 80px 40px; max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px;
         }
 
-        .product-counter button:hover {
-            background-color: #C4E3CB;
+        .form-box { background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-soft); }
+        .info-box { 
+            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+            padding: 40px; border-radius: 20px;
         }
 
-        .product-counter input {
-            width: 40px;
-            padding: 4px;
-            text-align: center;
-            border: 2px solid #D8EDDD;
-            border-radius: 5px;
-            font-size: 14px;
-            color: var(--text-dark);
-            background-color: var(--white);
-            appearance: textfield; /* Remove default arrows */
-            -moz-appearance: textfield; /* Firefox */
-            -webkit-appearance: none; /* Webkit browsers */
+        input, textarea, select {
+            width: 100%; padding: 14px; margin-bottom: 15px;
+            border: 1px solid #E0E0E0; border-radius: 8px; background: #F8F9FA;
+            font-family: inherit; font-size: 15px; transition: all 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            background: white; border-color: var(--primary-green); outline: none;
+            box-shadow: 0 0 0 4px rgba(76,175,80,0.1);
         }
 
-        .product-counter input::-webkit-inner-spin-button,
-        .product-counter input::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .submit-btn {
+            width: 100%; background: var(--text-dark); color: white;
+            border: none; padding: 16px; border-radius: 8px;
+            font-size: 16px; cursor: pointer; transition: background 0.3s;
         }
+        .submit-btn:hover { background: #333; }
 
-        .product-row button {
-            background-color: #D8EDDD;
-            color: var(--text-dark);
-            padding: 6px 12px;
-            border: 1px solid #A8C7AF;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            flex: 0 0 auto;
+        /* Product Repeater Styles */
+        .product-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .product-row select { margin-bottom: 0; flex: 2; }
+        .product-counter { display: flex; align-items: center; gap: 5px; }
+        .product-counter button { 
+            padding: 8px 12px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; 
         }
+        .product-counter input { width: 40px; text-align: center; margin: 0; padding: 8px; }
+        
+        .add-btn { background: var(--secondary-mint); color: var(--dark-green); border: none; padding: 10px 20px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 13px; }
 
-        .product-row button:hover {
-            background-color: #C4E3CB;
+        /* --- Footer --- */
+        footer { background: #f4f4f4; padding: 40px 20px; text-align: center; margin-top: 50px; }
+        .footer-logo { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
+
+        /* --- Toast Notification --- */
+        #toast {
+            visibility: hidden; min-width: 280px;
+            background-color: #333; color: #fff; text-align: center;
+            border-radius: 8px; padding: 16px; position: fixed; z-index: 3000;
+            left: 50%; bottom: 30px; transform: translateX(-50%);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            opacity: 0; transition: opacity 0.5s, bottom 0.5s;
         }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
 
-        input, textarea {
-            padding: 12px;
-            border: 1px solid #E0E0E0;
-            border-radius: 5px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: #999999;
-        }
-
-        button {
-            background-color: #D8EDDD;
-            color: var(--text-dark);
-            padding: 14px;
-            border: 1px solid #A8C7AF;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #C4E3CB;
-        }
-
-        /* Specific style for "Send Message" button */
-        .contact-form button[type="submit"] {
-            background-color: #F9F6EE;
-        }
-
-        .contact-form button[type="submit"]:hover {
-            background-color: #EDE4D3;
-        }
-
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--primary-green);
-            color: var(--white);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 20px 0;
-            transition: background-color 0.3s ease;
-        }
-
-        .whatsapp-btn svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-        }
-
-        .whatsapp-btn:hover {
-            background-color: #388E3C;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background-color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px var(--shadow-hover);
-        }
-
-        /* Footer */
-        footer {
-            padding: 20px;
-            background-color: #F9F6EE;
-            text-align: center;
-        }
-
-        .footer-logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .footer-logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-
-        .footer-logo span {
-            font-family: 'Marcellus', serif;
-            font-size: 28px;
-            color: #708238;
-        }
-
-        .footer-content p {
-            font-size: 14px;
-            margin: 5px 0;
-            color: var(--text-dark);
-        }
-
-        /* Responsive Design */
+        /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
-            .connect-section {
-                grid-template-columns: 1fr;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                height: 60vh;
-            }
-
-            .hero-content h1 {
-                font-size: 40px;
-            }
-
-            .hero-content h2 {
-                font-size: 28px; /* Adjusted for mobile */
-            }
-
-            .hero-content p {
-                font-size: 16px;
-            }
-
-            .hero-logo {
-                height: 60px;
-                margin-bottom: 8px;
-            }
-
-            .commitment-icons {
-                gap: 20px;
-            }
-
-            /* Add padding to commitment section paragraph on mobile */
-            .commitment-section p {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            /* Mobile styles for nav-links and menu */
-            .nav-container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .logo {
-                justify-content: center;
-                width: auto;
-            }
-
-            .menu-icon {
-                display: block;
-            }
-
+            .nav-container { padding: 0; }
+            .menu-icon { display: block; }
             .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: #E8F3E9;
-                box-shadow: 0 4px 10px var(--shadow);
-                padding: 15px 0;
-                border-radius: 10px;
-                z-index: 999;
+                display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: white; flex-direction: column; padding: 20px; gap: 15px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                margin-left: 0;
-                margin-bottom: 10px;
-                padding: 12px 20px;
-                width: 100%;
-                text-align: center;
-                font-size: 18px;
-                border-radius: 5px;
-                transition: background-color 0.3s ease, color 0.3s ease;
-            }
-
-            .nav-links a:hover {
-                background-color: var(--secondary-mint);
-                color: var(--primary-green);
-            }
-
-            /* Modal adjustments for mobile */
-            .modal-content {
-                width: 95%;
-                padding: 15px;
-            }
-
-            .modal-content img#modalImage {
-                /* Aspect ratio already set to 3:2, width will be 95% of modal */
-            }
-
-            .modal-content h3 {
-                font-size: 20px;
-            }
-
-            .modal-content p {
-                font-size: 14px;
-            }
-
-            .modal-content .price {
-                font-size: 16px;
-            }
-
-            .modal-content .quantity select {
-                font-size: 12px;
-                padding: 6px;
-            }
-
-            .modal-content .quantity .stamp-image {
-                height: 30px; /* Smaller stamp size on mobile */
-            }
-
-            .modal-content .quantity .stamp-image.highlighted {
-                /* Ensure highlight style is visible on mobile */
-                border-color: var(--primary-green);
-                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-            }
-
-            .modal-content .buy-now {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .product-row {
-                flex-direction: column;
-                gap: 5px;
-                align-items: stretch;
-            }
-
-            .product-counter button {
-                padding: 2px 6px;
-                font-size: 12px;
-            }
-
-            .product-counter input {
-                width: 35px;
-                padding: 2px;
-                font-size: 12px;
-            }
-
-            .product-row button {
-                padding: 4px 8px;
-                font-size: 12px;
-            }
+            .nav-links.active { display: flex; }
+            
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content h2 { font-size: 1.5rem; }
+            
+            .connect-section { grid-template-columns: 1fr; }
+            
+            .modal-content { grid-template-columns: 1fr; max-height: 95vh; }
+            .modal-image-col img { height: 250px; }
+            .modal-details-col { padding: 25px; }
+            
+            .product-row { flex-wrap: wrap; }
+            .product-row select { width: 100%; flex: auto; }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-        // Redirect non-www to www
-        if (window.location.hostname === 'softleaf.co') {
-            document.write('<meta http-equiv="refresh" content="0;URL=\'https://www.softleaf.co\'" />');
-        }
-    </script>
 </head>
 <body>
+
+    <div id="toast"></div>
+
     <nav>
         <div class="nav-container">
             <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                <img src="leaf-icon.png" alt="Leaf Icon">
-                <span>Softleaf</span>
+                <img src="leaf-icon.png" alt="Leaf" onerror="this.style.display='none'">
+                <span class="brand-font">Softleaf</span>
             </div>
             <div class="menu-icon" onclick="toggleMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
-                    <line x1="4" x2="20" y1="12" y2="12"></line>
-                    <line x1="4" x2="20" y1="6" y2="6"></line>
-                    <line x1="4" x2="20" y1="18" y2="18"></line>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
             </div>
             <div class="nav-links" id="navLinks">
                 <a href="#products">Products</a>
@@ -864,87 +374,92 @@
 
     <section class="hero">
         <div class="hero-content">
-            <img src="leaf-icon.png" alt="Softleaf Logo" class="hero-logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
             <h1>Softleaf</h1>
-            <h2>Clean Spaces Clear Mind</h2>
-            <p>At Softleaf, we blend sustainable care with nature-inspired scents to create fresh, comforting homes you’ll love coming back to.</p>
-            <a href="#products" class="cta-btn">Explore Products</a>
+            <h2>Clean Spaces, Clear Mind</h2>
+            <p>Blending sustainable care with nature-inspired scents to create fresh, comforting homes you’ll love coming back to.</p>
+            <a href="#products" class="cta-btn">Explore Collection</a>
         </div>
     </section>
 
     <section class="products-section" id="products">
-        <h2 class="section-title">Our Products</h2>
-        <div class="product-grid">
-            <div class="product-card" onclick="showProductModal('Softleaf Handwash', 'Gentle yet effective, infused with our signature fragrance.', 'product1.jpg', true, { 'Lavender Bliss': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-lavender', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-lavender', stamp: 'product1.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 299, amazon: '#amazon-handwash-1ltr-citrus', stamp: 'product1a.jpg' }, '5 ltr': { price: 1299, amazon: '#amazon-handwash-5ltr-citrus', stamp: 'product1.jpg' } } })">
-                <img src="product1.jpg" alt="Softleaf Handwash" onerror="this.src='placeholder.jpg'">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="product-grid" id="product-grid-container">
+            
+            <div class="product-card" onclick="openProduct('handwash')">
+                <img src="product1.jpg" alt="Handwash" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Softleaf+Handwash'">
                 <div class="product-card-content">
                     <h3>Softleaf Handwash</h3>
-                    <p>Gentle yet effective, infused with our signature fragrance.</p>
+                    <p>Gentle yet effective, infused with signature fragrance.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Manual Dish Wash Gel', 'Kills 99.9% of germs, Tough on grease, kind to hands.', 'product2.jpg', true, { '500 ml': { price: 349, amazon: '#amazon-product2-1ltr', stamp: 'product2.jpg' }, '5 ltr': { price: 1499, amazon: '#amazon-product2-5ltr', stamp: 'product2a.jpg' } })">
-                <img src="product2.jpg" alt="Manual Dish Wash Gel" onerror="this.src='placeholder.jpg'">
+
+            <div class="product-card" onclick="openProduct('dishwash')">
+                <img src="product2.jpg" alt="Dish Wash" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Dish+Wash'">
                 <div class="product-card-content">
                     <h3>Manual Dish Wash Gel</h3>
-                    <p>Kills 99.9% of germs, Tough on grease, kind to hands.</p>
+                    <p>Tough on grease, kind to hands. Kills 99.9% of germs.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('All-Purpose Disinfectant', 'Kills germs, keeps surfaces safe.', 'product3a.jpg', true, { '1 ltr': { price: 399, amazon: '#amazon-product3-1ltr', stamp: 'product3a.jpg' }, '5 ltr': { price: 1699, amazon: '#amazon-product3-5ltr', stamp: 'product3a.jpg' } })">
-                <img src="product3.jpg" alt="All-Purpose Disinfectant" onerror="this.src='placeholder.jpg'">
+
+            <div class="product-card" onclick="openProduct('disinfectant')">
+                <img src="product3.jpg" alt="Disinfectant" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Disinfectant'">
                 <div class="product-card-content">
                     <h3>All-Purpose Disinfectant</h3>
-                    <p>Kills germs, keeps surfaces safe.</p>
+                    <p>Keeps surfaces safe and germ-free.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Clear Glass Cleaner', 'Streak-free shine for a crystal-clear finish', 'product4a.jpg', false, { '1 ltr': { price: 329, amazon: '#amazon-product4-1ltr', stamp: 'product4a.jpg' } })">
-                <img src="product4.jpg" alt="Clear Glass Cleaner" onerror="this.src='placeholder.jpg'">
+
+            <div class="product-card" onclick="openProduct('glass')">
+                <img src="product4.jpg" alt="Glass Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Glass+Cleaner'">
                 <div class="product-card-content">
                     <h3>Clear Glass Cleaner</h3>
                     <p>Streak-free shine for a crystal-clear finish.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Floor Cleaner Collection', 'A range of floor cleaners with unique fragrances for a refreshed home.', 'combined-floor-cleaners.jpg', true, { 'Crystal Clear': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-crystal', stamp: 'product5.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-crystal', stamp: 'product5.jpg' } }, 'Gentle Care': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-gentle', stamp: 'product6a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-gentle', stamp: 'product6.jpg' } }, 'Lavender Bliss': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-lavender', stamp: 'product7a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-lavender', stamp: 'product7.jpg' } }, 'Citrus Burst': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-citrus', stamp: 'product8a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-citrus', stamp: 'product8.jpg' } }, 'Mint Renewal': { '1 ltr': { price: 300, amazon: '#amazon-floor-1ltr-mint', stamp: 'product9a.jpg' }, '5 ltr': { price: 500, amazon: '#amazon-floor-5ltr-mint', stamp: 'product9.jpg' } } })">
-                <img src="combined-floor-cleaners.jpg" alt="Floor Cleaner Collection" onerror="this.src='placeholder.jpg'">
+
+            <div class="product-card" onclick="openProduct('floor')">
+                <img src="combined-floor-cleaners.jpg" alt="Floor Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Floor+Collection'">
                 <div class="product-card-content">
                     <h3>Floor Cleaner Collection</h3>
-                    <p>A range of floor cleaners with unique fragrances for a refreshed home.</p>
+                    <p>Unique fragrances for a refreshed home.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Deep Toilet Cleaner', 'Deep clean with a refreshing aroma.', 'product10.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product10.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product10a.jpg' } })">
-                <img src="product10.jpg" alt="Deep Toilet Cleaner" onerror="this.src='placeholder.jpg'">
+
+            <div class="product-card" onclick="openProduct('toilet')">
+                <img src="product10.jpg" alt="Toilet Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Toilet+Cleaner'">
                 <div class="product-card-content">
                     <h3>Deep Toilet Cleaner</h3>
                     <p>Deep clean with a refreshing aroma.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
-            <div class="product-card" onclick="showProductModal('Pure Phenyl', 'Powerful disinfection with a bold scent.', 'product11.jpg', true, { '1 ltr': { price: 369, amazon: '#amazon-product10-1ltr', stamp: 'product11.jpg' }, '5 ltr': { price: 1599, amazon: '#amazon-product10-5ltr', stamp: 'product11a.jpg' } })">
-                <img src="product11.jpg" alt="Pure Phenyl" onerror="this.src='placeholder.jpg'">
+
+             <div class="product-card" onclick="openProduct('phenyl')">
+                <img src="product11.jpg" alt="Phenyl" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Pure+Phenyl'">
                 <div class="product-card-content">
                     <h3>Pure Phenyl</h3>
                     <p>Powerful disinfection with a bold scent.</p>
+                    <div class="card-footer"><span class="view-btn">View Options &rarr;</span></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="marketplace-section" id="marketplace">
-        <h2 class="section-title">Find Softleaf Products</h2>
-        <p style="text-align: center; margin-bottom: 30px; font-size: 16px;">Purchase your favorite Softleaf items conveniently from our trusted partners.</p>
+        <h2 class="section-title">Where to Buy</h2>
+        <p>Purchase convenient Softleaf items from trusted partners.</p>
         <div class="marketplace-links">
-            <a href="#amazon-store" id="amazon-store">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
+            <a href="#amazon-store" id="amazon-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                 Amazon Store
             </a>
-            <a href="#local-retailers" id="local-retailers">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
+            <a href="#local">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 Local Retailers
             </a>
         </div>
@@ -952,459 +467,425 @@
 
     <section class="commitment-section">
         <h2 class="section-title">The Softleaf Commitment</h2>
-        <p>We are dedicated to providing high-quality hygiene and cleaning products that are sustainably sourced and environmentally friendly. Our products align with our core values of sustainability, nature conservation, and eco-consciousness.</p>
+        <p style="max-width: 600px; margin: 0 auto; color: #666;">Dedicated to high-quality hygiene that is sustainably sourced. Our products align with our core values of conservation and eco-consciousness.</p>
         <div class="commitment-icons">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
-                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
-                </svg>
-                Natural Ingredients
+            <div class="commitment-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                <span>Natural</span>
             </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package">
-                    <path d="m7.5 4.27 9 5.15"></path>
-                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
-                    <path d="m3.3 7 8.7 5"></path>
-                    <path d="m3.3 17 8.7-5"></path>
-                    <path d="M12 22V12"></path>
-                </svg>
-                Sustainable Packaging
+            <div class="commitment-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Cruelty-Free</span>
             </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                Cruelty-Free
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 3h6v6"></path>
-                    <path d="M9 21H3v-6"></path>
-                    <path d="M9 3H3v6"></path>
-                    <path d="M15 21h6v-6"></path>
-                    <path d="M12 8l4 4-4 4"></path>
-                    <path d="M8 12H16"></path>
-                </svg>
-                Recyclable
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20"></path>
-                    <path d="M12 2a14.5 14.5 0 0 1 0 20"></path>
-                    <path d="M2 12h20"></path>
-                </svg>
-                Ethical Sourcing
+            <div class="commitment-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20"></path><path d="M12 2a14.5 14.5 0 0 1 0 20"></path><path d="M2 12h20"></path></svg>
+                <span>Ethical</span>
             </div>
         </div>
     </section>
 
     <section class="connect-section" id="connect">
-        <div class="contact-form">
+        <div class="form-box">
             <h3>Get In Touch</h3>
+            <p style="margin-bottom: 20px; color: #666;">Bulk orders or general inquiries? We are here to help.</p>
             <form id="contact-form">
                 <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address">
-                <input type="tel" name="phone" placeholder="Phone Number">
+                <div style="display: flex; gap: 10px;">
+                    <input type="email" name="email" placeholder="Email Address">
+                    <input type="tel" name="phone" placeholder="Phone Number">
+                </div>
+                
                 <div id="product-fields">
+                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; display: block;">Interested Products:</label>
                     <div class="product-row">
-                        <select name="product[]" required onchange="checkSelections(this)">
-                            <option value="" disabled selected>Select a Product</option>
+                        <select name="product[]" onchange="checkSelections(this)">
+                            <option value="" disabled selected>Select Product</option>
                             <option value="Softleaf Handwash">Softleaf Handwash</option>
                             <option value="Manual Dish Wash Gel">Manual Dish Wash Gel</option>
                             <option value="All-Purpose Disinfectant">All-Purpose Disinfectant</option>
                             <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
                             <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
-                            <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
-                            <option value="Pure Phenyl">Pure Phenyl</option>
-                        </select>
-                        <select name="quantity[]" required onchange="checkSelections(this)">
-                            <option value="" disabled selected>Select Quantity</option>
-                            <option value="1 ltr">1 ltr</option>
-                            <option value="5 ltr">5 ltr</option>
                         </select>
                         <div class="product-counter">
-                            <button type="button" onclick="updateCounter(this, -1)" disabled>-</button>
-                            <input type="number" name="numberNeeded[]" value="1" min="1" max="20" readonly disabled>
-                            <button type="button" onclick="updateCounter(this, 1)" disabled>+</button>
+                            <button type="button" onclick="updateCounter(this, -1)">-</button>
+                            <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
+                            <button type="button" onclick="updateCounter(this, 1)">+</button>
                         </div>
-                        <button type="button" onclick="addProductField()">+ Add Product</button>
                     </div>
                 </div>
-                <textarea name="message" placeholder="Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
+                <button type="button" class="add-btn" onclick="addProductField()">+ Add Another Product</button>
+                
+                <textarea name="message" placeholder="Additional Message" rows="4" style="margin-top: 15px;"></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
-        <div class="connect-options">
-            <h3>Connect With Us</h3>
-            <form id="brochure-form" style="margin-bottom: 20px;">
-                <input type="email" name="email" placeholder="Email Address for Brochure" required>
-                <button type="submit">Request Brochure</button>
+        
+        <div class="info-box">
+            <h3>Brochure & Social</h3>
+            <form id="brochure-form" style="margin: 20px 0;">
+                <input type="email" name="email" placeholder="Enter Email for Brochure" required>
+                <button type="submit" class="submit-btn" style="background: var(--primary-green);">Request Brochure</button>
             </form>
-            <a href="https://wa.me/+919048994992" target="_blank" class="whatsapp-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                </svg>
+            
+            <a href="https://wa.me/+919048994992" target="_blank" class="submit-btn" style="background: #25D366; text-align: center; display: block; text-decoration: none; margin-bottom: 30px;">
                 Chat on WhatsApp
             </a>
-            <h3 style="margin-top: 30px;">Follow Our Journey</h3>
-            <p style="text-align: center; margin-bottom: 20px;">Stay updated with our latest products and news.</p>
-            <div class="social-icons">
-                <a target="_blank" rel="noopener noreferrer" aria-label="Instagram" href="https://instagram.com">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                    </svg>
-                </a>
-                <a target="_blank" rel="noopener noreferrer" aria-label="YouTube" href="https://youtube.com/@softleafglobal?si=N88hzSiTzNikVUsE">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                    </svg>
-                </a>
+
+            <div style="text-align: center;">
+                <h4>Follow Us</h4>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
+                    <a href="https://instagram.com" target="_blank"><svg width="24" height="24" stroke="#4CAF50" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://youtube.com/@softleafglobal" target="_blank"><svg width="24" height="24" stroke="#4CAF50" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-logo">
-            <img src="leaf-icon.png" alt="Leaf Icon">
-            <span>Softleaf</span>
+            <img src="leaf-icon.png" alt="Leaf" style="height: 24px;">
+            <span class="brand-font" style="font-size: 20px; color: var(--accent-sage);">Softleaf</span>
         </div>
-        <div class="footer-content">
-            <p>© 2025 Softleaf. All Rights Reserved.</p>
-            <p>Clean Spaces, Clear Mind.</p>
-            <p>Thrissur, Kerala, India</p>
-        </div>
+        <p style="color: #888; font-size: 14px;">© 2025 Softleaf. Clean Spaces, Clear Mind.<br>Thrissur, Kerala, India</p>
     </footer>
 
-    <!-- Product Modal -->
     <div class="modal" id="productModal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeProductModal()">×</span>
-            <img id="modalImage" src="" alt="Product Image">
-            <h3 id="modalTitle"></h3>
-            <p id="modalDescription"></p>
-            <div class="price" id="modalPrice"></div>
-            <div class="quantity" id="modalQuantity"></div>
-            <a id="modalBuyNow" href="#" class="buy-now">Buy Now on Amazon</a>
+            <div class="close-btn" onclick="closeProductModal()">×</div>
+            
+            <div class="modal-image-col">
+                <img id="modalImage" src="" alt="Product" onerror="this.src='https://via.placeholder.com/600x600/e0f2f1/708238?text=Softleaf'">
+            </div>
+            
+            <div class="modal-details-col">
+                <h3 id="modalTitle" class="brand-font" style="font-size: 1.8rem; color: var(--accent-sage);"></h3>
+                <p id="modalDescription" style="color: #666;"></p>
+                <div class="modal-price" id="modalPrice"></div>
+
+                <div class="modal-options">
+                    <div id="fragranceContainer" style="display:none;">
+                        <label>Fragrance</label>
+                        <select id="fragranceSelect"></select>
+                    </div>
+
+                    <div id="sizeContainer">
+                        <label>Size</label>
+                        <select id="sizeSelect"></select>
+                    </div>
+
+                    <div class="stamp-selector" id="stampSelector"></div>
+                </div>
+
+                <a href="#" id="modalBuyNow" target="_blank" class="buy-now-btn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    Buy Now on Amazon
+                </a>
+            </div>
         </div>
     </div>
 
     <script>
-        // Initialize EmailJS (replace with your public key)
+        // --- 1. CONFIGURATION ---
         (function() {
-            emailjs.init("hBWhln6TAGQWZhU3N"); // Your EmailJS public key
+            // REPLACE WITH YOUR PUBLIC KEY
+            emailjs.init("hBWhln6TAGQWZhU3N"); 
         })();
 
-        let isContactFormSubmitting = false;
-        let isBrochureFormSubmitting = false;
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const contactForm = document.getElementById("contact-form");
-            if (contactForm) {
-                contactForm.addEventListener("submit", function(e) {
-                    e.preventDefault();
-                    if (isContactFormSubmitting) return;
-                    isContactFormSubmitting = true;
-
-                    const name = contactForm.name.value;
-                    const email = contactForm.email.value;
-                    const phone = contactForm.phone.value;
-                    const message = contactForm.message.value;
-
-                    if (!email && !phone) {
-                        alert("Please provide either an email address or a phone number.");
-                        isContactFormSubmitting = false;
-                        return;
+        // --- 2. DATA (Cleaned up from HTML) ---
+        const productsData = {
+            "handwash": {
+                title: "Softleaf Handwash",
+                desc: "Gentle yet effective, infused with our signature fragrance.",
+                image: "product1.jpg",
+                hasOptions: true,
+                variants: {
+                    "Lavender Bliss": {
+                        "1 ltr": { price: 299, url: "#amazon-handwash-lav-1", img: "product1a.jpg" },
+                        "5 ltr": { price: 1299, url: "#amazon-handwash-lav-5", img: "product1.jpg" }
+                    },
+                    "Citrus Burst": {
+                        "1 ltr": { price: 299, url: "#amazon-handwash-cit-1", img: "product1a.jpg" },
+                        "5 ltr": { price: 1299, url: "#amazon-handwash-cit-5", img: "product1.jpg" }
                     }
-
-                    let productDetails = [];
-                    const productRows = contactForm.querySelectorAll('.product-row');
-                    productRows.forEach(row => {
-                        const productSelect = row.querySelector('select[name="product[]"]');
-                        const quantitySelect = row.querySelector('select[name="quantity[]"]');
-                        const numberInput = row.querySelector('input[name="numberNeeded[]"]');
-                        if (productSelect.value && quantitySelect.value && numberInput.value) {
-                            productDetails.push(`- Product: ${productSelect.value}, Quantity: ${quantitySelect.value}, Number Needed: ${numberInput.value}`);
-                        }
-                    });
-                    const productMessage = productDetails.length > 0 ? `Product Details:\n${productDetails.join('\n')}\n\n` : '';
-
-                    emailjs.send("service_y4wdacc", "template_panrlz9", {
-                        from_name: name,
-                        from_email: email,
-                        phone: phone,
-                        message: productMessage + message
-                    })
-                    .then(function(response) {
-                        alert("Message sent! We'll get back to you soon.");
-                        contactForm.reset();
-                        isContactFormSubmitting = false;
-                    }, function(error) {
-                        alert("Failed to send message. Please try again later.");
-                        isContactFormSubmitting = false;
-                    });
-                });
-            }
-
-            const brochureForm = document.getElementById("brochure-form");
-            if (brochureForm) {
-                brochureForm.addEventListener("submit", function(e) {
-                    e.preventDefault();
-                    if (isBrochureFormSubmitting) return;
-                    isBrochureFormSubmitting = true;
-
-                    const email = brochureForm.email.value;
-
-                    emailjs.send("service_y4wdacc", "template_r9zl5on", {
-                        to_email: email,
-                    })
-                    .then(function(response) {
-                        alert("Brochure sent! Please check your email.");
-                        brochureForm.reset();
-                        isBrochureFormSubmitting = false;
-                    }, function(error) {
-                        alert("Failed to send brochure. Please try again later.");
-                        isBrochureFormSubmitting = false;
-                    });
-                });
-            }
-        });
-
-        // Global variable to store the current product's quantities
-        let currentProductQuantities = {};
-
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Add event listeners to navigation links to close the menu on click (for mobile)
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navLinks = document.getElementById('navLinks');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Product Modal Functionality
-        const modal = document.getElementById('productModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDescription = document.getElementById('modalDescription');
-        const modalPrice = document.getElementById('modalPrice');
-        const modalQuantity = document.getElementById('modalQuantity');
-        const modalBuyNow = document.getElementById('modalBuyNow');
-
-        function showProductModal(title, description, image, hasQuantityOptions, quantities) {
-            currentProductQuantities = quantities;
-
-            modalImage.src = image;
-            modalImage.alt = title;
-            modalTitle.textContent = title;
-            modalDescription.textContent = description;
-
-            if (hasQuantityOptions) {
-                if (title === 'Pure Hands Handwash' || title === 'Floor Cleaner Collection') {
-                    let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFragranceDetails(this.value)">';
-                    for (const fragrance of Object.keys(quantities)) {
-                        selectHTML += `<option value="${fragrance}">${fragrance}</option>`;
-                    }
-                    selectHTML += '</select>';
-                    selectHTML += '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
-                    const firstFragrance = Object.keys(quantities)[0];
-                    for (const size of ['1 ltr', '5 ltr']) {
-                        selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
-                    }
-                    selectHTML += '</select>';
-                    selectHTML += '<div class="stamp-images">';
-                    selectHTML += `<img src="${quantities[firstFragrance]['1 ltr'].stamp}" alt="1 ltr Stamp" class="stamp-image" data-size="1 ltr">`;
-                    selectHTML += `<img src="${quantities[firstFragrance]['5 ltr'].stamp}" alt="5 ltr Stamp" class="stamp-image" data-size="5 ltr">`;
-                    selectHTML += '</div>';
-                    modalQuantity.innerHTML = selectHTML;
-
-                    const defaultFragrance = Object.keys(quantities)[0];
-                    modalImage.src = quantities[defaultFragrance]['1 ltr'].stamp;
-                    modalImage.alt = `${defaultFragrance} ${'1 ltr'} Image`;
-                    modalPrice.textContent = `₹${quantities[defaultFragrance]['1 ltr'].price}`;
-                    modalBuyNow.href = quantities[defaultFragrance]['1 ltr'].amazon;
-                    highlightStampImage(defaultFragrance, '1 ltr');
-                } else {
-                    let selectHTML = '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
-                    for (const size of Object.keys(quantities)) {
-                        selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
-                    }
-                    selectHTML += '</select>';
-                    selectHTML += '<div class="stamp-images">';
-                    for (const [size, details] of Object.entries(quantities)) {
-                        selectHTML += `<img src="${details.stamp}" alt="${size}" class="stamp-image" data-size="${size}">`;
-                    }
-                    selectHTML += '</div>';
-                    modalQuantity.innerHTML = selectHTML;
-
-                    const firstSize = Object.keys(quantities)[0];
-                    modalImage.src = quantities[firstSize].stamp;
-                    modalPrice.textContent = `₹${quantities[firstSize].price}`;
-                    modalBuyNow.href = quantities[firstSize].amazon;
-                    highlightStampImage(null, firstSize);
                 }
-            } else {
-                const size = Object.keys(quantities)[0];
-                modalQuantity.innerHTML = `<span>Quantity: ${size}</span><img src="${quantities[size].stamp}" alt="${size}" class="stamp-image">`;
-                modalPrice.textContent = `₹${quantities[size].price}`;
-                modalBuyNow.href = quantities[size].amazon;
-            }
-
-            modal.style.display = 'flex';
-        }
-
-        function updateFragranceDetails(selectedFragrance) {
-            const quantities = currentProductQuantities[selectedFragrance];
-            let selectHTML = '<label for="fragranceSelect">Fragrance:</label><select id="fragranceSelect" onchange="updateFragranceDetails(this.value)">';
-            for (const fragrance of Object.keys(currentProductQuantities)) {
-                selectHTML += `<option value="${fragrance}" ${fragrance === selectedFragrance ? 'selected' : ''}>${fragrance}</option>`;
-            }
-            selectHTML += '</select>';
-            selectHTML += '<label for="quantitySelect">Quantity:</label><select id="quantitySelect" onchange="updateModalDetails(this.value)">';
-            for (const size of ['1 ltr', '5 ltr']) {
-                selectHTML += `<option value="${size}" ${size === '1 ltr' ? 'selected' : ''}>${size}</option>`;
-            }
-            selectHTML += '</select>';
-            selectHTML += '<div class="stamp-images">';
-            selectHTML += `<img src="${quantities['1 ltr'].stamp}" alt="1 ltr Stamp" class="stamp-image" data-size="1 ltr">`;
-            selectHTML += `<img src="${quantities['5 ltr'].stamp}" alt="5 ltr Stamp" class="stamp-image" data-size="5 ltr">`;
-            selectHTML += '</div>';
-            modalQuantity.innerHTML = selectHTML;
-
-            modalImage.src = quantities['1 ltr'].stamp;
-            modalImage.alt = `${selectedFragrance} ${'1 ltr'} Image`;
-            modalPrice.textContent = `₹${quantities['1 ltr'].price}`;
-            modalBuyNow.href = quantities['1 ltr'].amazon;
-            highlightStampImage(selectedFragrance, '1 ltr');
-        }
-
-        function updateModalDetails(selectedSize) {
-            const quantities = currentProductQuantities;
-            let price, amazon, image;
-            if (modalTitle.textContent === 'Pure Hands Handwash' || modalTitle.textContent === 'Floor Cleaner Collection') {
-                const selectedFragrance = document.getElementById('fragranceSelect').value;
-                price = quantities[selectedFragrance][selectedSize].price;
-                amazon = quantities[selectedFragrance][selectedSize].amazon;
-                image = quantities[selectedFragrance][selectedSize].stamp;
-                modalImage.src = image;
-                modalImage.alt = `${selectedFragrance} ${selectedSize} Image`;
-                modalPrice.textContent = `₹${price}`;
-                modalBuyNow.href = amazon;
-                highlightStampImage(selectedFragrance, selectedSize);
-            } else {
-                price = quantities[selectedSize].price;
-                amazon = quantities[selectedSize].amazon;
-                image = quantities[selectedSize].stamp;
-                modalImage.src = image;
-                const stampImages = document.querySelectorAll('.stamp-image');
-                stampImages.forEach(img => {
-                    if (img.getAttribute('data-size') === selectedSize) {
-                        img.classList.add('highlighted');
-                    } else {
-                        img.classList.remove('highlighted');
+            },
+            "dishwash": {
+                title: "Manual Dish Wash Gel",
+                desc: "Kills 99.9% of germs, Tough on grease, kind to hands.",
+                image: "product2.jpg",
+                hasOptions: false,
+                variants: {
+                    "Standard": {
+                        "500 ml": { price: 349, url: "#amazon-dish-500", img: "product2.jpg" },
+                        "5 ltr": { price: 1499, url: "#amazon-dish-5", img: "product2a.jpg" }
                     }
-                });
-                modalPrice.textContent = `₹${price}`;
-                modalBuyNow.href = amazon;
+                }
+            },
+            "disinfectant": {
+                title: "All-Purpose Disinfectant",
+                desc: "Kills germs, keeps surfaces safe.",
+                image: "product3.jpg",
+                hasOptions: false,
+                variants: {
+                    "Standard": {
+                        "1 ltr": { price: 399, url: "#amazon-dis-1", img: "product3a.jpg" },
+                        "5 ltr": { price: 1699, url: "#amazon-dis-5", img: "product3a.jpg" }
+                    }
+                }
+            },
+            "glass": {
+                title: "Clear Glass Cleaner",
+                desc: "Streak-free shine for a crystal-clear finish.",
+                image: "product4.jpg",
+                hasOptions: false,
+                variants: {
+                    "Standard": {
+                        "1 ltr": { price: 329, url: "#amazon-glass-1", img: "product4a.jpg" }
+                    }
+                }
+            },
+            "floor": {
+                title: "Floor Cleaner Collection",
+                desc: "A range of floor cleaners with unique fragrances.",
+                image: "combined-floor-cleaners.jpg",
+                hasOptions: true,
+                variants: {
+                    "Crystal Clear": { "1 ltr": { price: 300, url: "#", img: "product5.jpg"}, "5 ltr": { price: 500, url: "#", img: "product5.jpg"} },
+                    "Gentle Care": { "1 ltr": { price: 300, url: "#", img: "product6a.jpg"}, "5 ltr": { price: 500, url: "#", img: "product6.jpg"} },
+                    "Lavender": { "1 ltr": { price: 300, url: "#", img: "product7a.jpg"}, "5 ltr": { price: 500, url: "#", img: "product7.jpg"} },
+                    "Citrus": { "1 ltr": { price: 300, url: "#", img: "product8a.jpg"}, "5 ltr": { price: 500, url: "#", img: "product8.jpg"} }
+                }
+            },
+            "toilet": {
+                title: "Deep Toilet Cleaner",
+                desc: "Deep clean with a refreshing aroma.",
+                image: "product10.jpg",
+                hasOptions: false,
+                variants: {
+                    "Standard": {
+                        "1 ltr": { price: 369, url: "#", img: "product10.jpg" },
+                        "5 ltr": { price: 1599, url: "#", img: "product10a.jpg" }
+                    }
+                }
+            },
+            "phenyl": {
+                title: "Pure Phenyl",
+                desc: "Powerful disinfection with a bold scent.",
+                image: "product11.jpg",
+                hasOptions: false,
+                variants: {
+                    "Standard": {
+                        "1 ltr": { price: 369, url: "#", img: "product11.jpg" },
+                        "5 ltr": { price: 1599, url: "#", img: "product11a.jpg" }
+                    }
+                }
             }
+        };
+
+        // --- 3. UI LOGIC ---
+        
+        // Navigation Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
         }
 
-        function highlightStampImage(fragrance, selectedSize) {
-            const stampImages = document.querySelectorAll('.stamp-image');
-            stampImages.forEach(img => img.classList.remove('highlighted'));
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
 
-            const targetImage = fragrance
-                ? document.querySelector(`.stamp-image[data-size="${selectedSize}"]`)
-                : document.querySelector(`.stamp-image[data-size="${selectedSize}"]`);
-            if (targetImage) {
-                targetImage.classList.add('highlighted');
+        // --- 4. MODAL LOGIC ---
+        let currentProduct = null;
+        let selectedFragrance = null;
+        let selectedSize = null;
+
+        function openProduct(id) {
+            const data = productsData[id];
+            if(!data) return;
+
+            currentProduct = data;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDescription').innerText = data.desc;
+            document.getElementById('modalImage').src = data.image;
+
+            const fragSelect = document.getElementById('fragranceSelect');
+            const fragContainer = document.getElementById('fragranceContainer');
+            
+            // Setup Fragrance Dropdown
+            fragSelect.innerHTML = '';
+            const fragKeys = Object.keys(data.variants);
+            
+            if(data.hasOptions && fragKeys.length > 1) {
+                fragContainer.style.display = 'block';
+                fragKeys.forEach(frag => {
+                    const opt = document.createElement('option');
+                    opt.value = frag;
+                    opt.innerText = frag;
+                    fragSelect.appendChild(opt);
+                });
+                selectedFragrance = fragKeys[0];
+            } else {
+                fragContainer.style.display = 'none';
+                selectedFragrance = "Standard"; 
+                // Handle case where product has options but technically listed as "Standard" in data
+                if(fragKeys.length > 0) selectedFragrance = fragKeys[0];
             }
+
+            fragSelect.onchange = (e) => {
+                selectedFragrance = e.target.value;
+                updateSizeOptions();
+            };
+
+            updateSizeOptions(); // Initialize sizes based on first fragrance
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function updateSizeOptions() {
+            const sizeSelect = document.getElementById('sizeSelect');
+            sizeSelect.innerHTML = '';
+            
+            const variantData = currentProduct.variants[selectedFragrance];
+            const sizes = Object.keys(variantData);
+
+            sizes.forEach(size => {
+                const opt = document.createElement('option');
+                opt.value = size;
+                opt.innerText = size;
+                sizeSelect.appendChild(opt);
+            });
+
+            selectedSize = sizes[0];
+            sizeSelect.onchange = (e) => {
+                selectedSize = e.target.value;
+                updateDetails();
+            };
+
+            updateDetails();
+        }
+
+        function updateDetails() {
+            const details = currentProduct.variants[selectedFragrance][selectedSize];
+            
+            // Update Price
+            document.getElementById('modalPrice').innerText = `₹${details.price}`;
+            
+            // Update Link
+            document.getElementById('modalBuyNow').href = details.url;
+
+            // Update Image (if variant has specific image)
+            if(details.img) {
+                document.getElementById('modalImage').src = details.img;
+            }
+
+            // Update Stamps
+            const stampContainer = document.getElementById('stampSelector');
+            stampContainer.innerHTML = '';
+            const variantData = currentProduct.variants[selectedFragrance];
+            Object.keys(variantData).forEach(sz => {
+                if(variantData[sz].img) {
+                    const img = document.createElement('img');
+                    img.src = variantData[sz].img;
+                    img.className = `stamp-image ${sz === selectedSize ? 'active' : ''}`;
+                    img.onclick = () => {
+                        document.getElementById('sizeSelect').value = sz;
+                        selectedSize = sz;
+                        updateDetails();
+                    };
+                    stampContainer.appendChild(img);
+                }
+            });
         }
 
         function closeProductModal() {
-            modal.style.display = 'none';
-            currentProductQuantities = {};
+            document.getElementById('productModal').style.display = 'none';
         }
 
         window.onclick = function(event) {
-            if (event.target === modal) {
+            if (event.target === document.getElementById('productModal')) {
                 closeProductModal();
             }
         };
 
-        // Contact Form Product Fields
+        // --- 5. FORM LOGIC ---
         function addProductField() {
-            const productFields = document.getElementById('product-fields');
-            const rows = productFields.getElementsByClassName('product-row');
-            if (rows.length >= 6) {
-                alert('You can only add up to 6 products.');
-                return;
-            }
-            const newRow = document.createElement('div');
-            newRow.className = 'product-row';
-            newRow.innerHTML = `
-                <select name="product[]" required onchange="checkSelections(this)">
-                    <option value="" disabled selected>Select a Product</option>
-                    <option value="Softleaf Handwash">Softleaf Handwash</option>
-                    <option value="Manual Dish Wash Gel">Manual Dish Wash Gel</option>
-                    <option value="All-Purpose Disinfectant">All-Purpose Disinfectant</option>
-                    <option value="Clear Glass Cleaner">Clear Glass Cleaner</option>
-                    <option value="Floor Cleaner Collection">Floor Cleaner Collection</option>
-                    <option value="Deep Toilet Cleaner">Deep Toilet Cleaner</option>
-                    <option value="Pure Phenyl">Pure Phenyl</option>
-                </select>
-                <select name="quantity[]" required onchange="checkSelections(this)">
-                    <option value="" disabled selected>Select Quantity</option>
-                    <option value="1 ltr">1 ltr</option>
-                    <option value="5 ltr">5 ltr</option>
+            const container = document.getElementById('product-fields');
+            const count = container.querySelectorAll('.product-row').length;
+            if(count >= 5) { showToast("Maximum 5 products allowed."); return; }
+
+            const div = document.createElement('div');
+            div.className = 'product-row';
+            div.innerHTML = `
+                <select name="product[]">
+                    <option value="" disabled selected>Select Product</option>
+                    ${Object.values(productsData).map(p => `<option value="${p.title}">${p.title}</option>`).join('')}
                 </select>
                 <div class="product-counter">
-                    <button type="button" onclick="updateCounter(this, -1)" disabled>-</button>
-                    <input type="number" name="numberNeeded[]" value="1" min="1" max="20" readonly disabled>
-                    <button type="button" onclick="updateCounter(this, 1)" disabled>+</button>
+                    <button type="button" onclick="updateCounter(this, -1)">-</button>
+                    <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
+                    <button type="button" onclick="updateCounter(this, 1)">+</button>
+                    <button type="button" onclick="this.closest('.product-row').remove()" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
                 </div>
-                <button type="button" onclick="this.parentElement.remove()">- Remove</button>
             `;
-            productFields.insertBefore(newRow, productFields.firstChild); // Insert at the top
+            container.appendChild(div);
         }
 
-        function updateCounter(button, change) {
-            const counter = button.closest('.product-counter');
-            const input = counter.querySelector('input[name="numberNeeded[]"]');
-            const buttons = counter.querySelectorAll('button');
-            let value = parseInt(input.value);
-            value += change;
-            if (value < 1) value = 1;
-            if (value > 20) value = 20;
-            input.value = value;
+        function updateCounter(btn, val) {
+            const input = btn.parentElement.querySelector('input');
+            let newVal = parseInt(input.value) + val;
+            if(newVal < 1) newVal = 1;
+            input.value = newVal;
         }
 
-        function checkSelections(select) {
-            const row = select.closest('.product-row');
-            const productSelect = row.querySelector('select[name="product[]"]');
-            const quantitySelect = row.querySelector('select[name="quantity[]"]');
-            const counter = row.querySelector('.product-counter');
-            const input = counter.querySelector('input[name="numberNeeded[]"]');
-            const buttons = counter.querySelectorAll('button');
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerText = "Sending...";
+            
+            // Gather product details text
+            let productText = "";
+            this.querySelectorAll('.product-row').forEach(row => {
+                const sel = row.querySelector('select');
+                const qty = row.querySelector('input');
+                if(sel.value) productText += `${sel.value} (Qty: ${qty.value})\n`;
+            });
 
-            if (productSelect.value && quantitySelect.value) {
-                input.disabled = false;
-                buttons.forEach(button => button.disabled = false);
-            } else {
-                input.disabled = true;
-                buttons.forEach(button => button.disabled = true);
-                input.value = 1; // Reset to 1 if either is deselected
-            }
-        }
+            const templateParams = {
+                from_name: this.name.value,
+                from_email: this.email.value,
+                phone: this.phone.value,
+                message: this.message.value + "\n\nProducts:\n" + productText
+            };
+
+            emailjs.send("service_y4wdacc", "template_panrlz9", templateParams)
+            .then(() => {
+                showToast("Message Sent Successfully!");
+                this.reset();
+                btn.innerText = "Send Message";
+            }, (err) => {
+                showToast("Failed to send. Try again.");
+                btn.innerText = "Send Message";
+                console.error(err);
+            });
+        });
+
+        document.getElementById('brochure-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.innerText = "...";
+            
+            emailjs.send("service_y4wdacc", "template_r9zl5on", { to_email: this.email.value })
+            .then(() => {
+                showToast("Brochure request sent!");
+                this.reset();
+                btn.innerText = "Request Brochure";
+            }, () => {
+                showToast("Error sending request.");
+                btn.innerText = "Request Brochure";
+            });
+        });
     </script>
-    <script src="js/emailjs-init.js"></script>
 </body>
 </html>
