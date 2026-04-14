@@ -1,6 +1,6 @@
 // Initialize EmailJS (replace with your public key)
 (function() {
-    emailjs.init("hBWhln6TAGQWZhU3N"); // Your EmailJS public key
+    emailjs.init("-WJ90BZg2Us5oMo4c"); // Your EmailJS public key
 })();
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const email = form.email.value;
 
         // Send email using EmailJS
-        emailjs.send("service_y4wdacc", "template_r9zl5on", {
+        emailjs.send("service_nvtpn9o", "template_ty9do8j", {
             to_email: email,
         })
         .then(function(response) {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            emailjs.send("service_y4wdacc", "template_panrlz9", {
+            emailjs.send("service_nvtpn9o", "template_e3sonzq", {
                 from_name: name,
                 from_email: email,
                 phone: phone,

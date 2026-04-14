@@ -588,7 +588,7 @@
         // --- 1. CONFIGURATION ---
         (function() {
             // REPLACE WITH YOUR PUBLIC KEY
-            emailjs.init("hBWhln6TAGQWZhU3N"); 
+            emailjs.init("-WJ90BZg2Us5oMo4c"); 
         })();
 
         // --- 2. DATA (Cleaned up from HTML) ---
@@ -859,7 +859,7 @@
                 message: this.message.value + "\n\nProducts:\n" + productText
             };
 
-            emailjs.send("service_y4wdacc", "template_panrlz9", templateParams)
+            emailjs.send("service_nvtpn9o", "template_e3sonzq", templateParams)
             .then(() => {
                 showToast("Message Sent Successfully!");
                 this.reset();
@@ -876,7 +876,7 @@
             const btn = this.querySelector('button');
             btn.innerText = "...";
             
-            emailjs.send("service_y4wdacc", "template_r9zl5on", { to_email: this.email.value })
+            emailjs.send("service_nvtpn9o", "template_ty9do8j", { to_email: this.email.value })
             .then(() => {
                 showToast("Brochure request sent!");
                 this.reset();
