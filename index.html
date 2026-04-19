@@ -301,8 +301,9 @@
         .submit-btn:hover { background: #333; }
 
         /* Product Repeater Styles */
-        .product-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .product-row select { margin-bottom: 0; flex: 2; }
+        .product-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .product-row select { margin-bottom: 0; flex: 1; min-width: 150px; }
+        .variant-options { display: flex; gap: 10px; flex: 2; min-width: 200px; }
         .product-counter { display: flex; align-items: center; gap: 5px; }
         .product-counter button { 
             padding: 8px 12px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; 
@@ -518,16 +519,18 @@
                             <option value="Power Toilet Cleaner">Power Toilet Cleaner</option>
                             <option value="All-Purpose Cleaner">All-Purpose Cleaner</option>
                         </select>
+                        <div class="variant-options"></div>
                         <div class="product-counter">
                             <button type="button" onclick="updateCounter(this, -1)">-</button>
                             <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
                             <button type="button" onclick="updateCounter(this, 1)">+</button>
+                            <button type="button" onclick="removeProductField(this)" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="add-btn" onclick="addProductField()">+ Add Another Product</button>
                 
-                <textarea name="message" placeholder="Additional Message" rows="4" style="margin-top: 15px;"></textarea>
+                <textarea name="message" placeholder="Additional details (Please include your delivery address if placing an order)" rows="4" style="margin-top: 15px;"></textarea>
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
@@ -588,9 +591,9 @@
                     <div class="stamp-selector" id="stampSelector"></div>
                 </div>
 
-                <a href="#" id="modalBuyNow" target="_blank" class="buy-now-btn">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Buy Now on Amazon
+                <a href="#" id="modalBuyNow" onclick="addToInquiry(event)" class="buy-now-btn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+                    Add to Request
                 </a>
             </div>
         </div>
@@ -798,8 +801,7 @@
             // Update Price
             document.getElementById('modalPrice').innerText = `₹${details.price}`;
             
-            // Update Link
-            document.getElementById('modalBuyNow').href = details.url;
+            // Update Link removed for Add to Inquiry
 
             // Update Image (if variant has specific image)
             if(details.img) {
@@ -835,7 +837,129 @@
             }
         };
 
+        function addToInquiry(e) {
+            e.preventDefault();
+            const container = document.getElementById('product-fields');
+            let rows = container.querySelectorAll('.product-row');
+            
+            let added = false;
+            rows.forEach(row => {
+                const select = row.querySelector('select[name="product[]"]');
+                const fragSel = row.querySelector('.frag-select');
+                const sizeSel = row.querySelector('.size-select');
+                
+                let matchesTitle = select && select.value === currentProduct.title;
+                let matchesFrag = !fragSel || (selectedFragrance && fragSel.value === selectedFragrance);
+                let matchesSize = !sizeSel || (selectedSize && sizeSel.value === selectedSize);
+
+                if (matchesTitle && matchesFrag && matchesSize) {
+                    updateCounter(row.querySelector('button'), 1);
+                    added = true;
+                }
+            });
+
+            if (!added) {
+                let emptyRow = Array.from(rows).find(row => !row.querySelector('select[name="product[]"]').value);
+                let targetRow = emptyRow;
+                
+                if(!targetRow) {
+                    if(rows.length < 5) {
+                        addProductField();
+                        const newRows = container.querySelectorAll('.product-row');
+                        targetRow = newRows[newRows.length - 1];
+                    } else {
+                        showToast("List is full. Submit text in message.");
+                        return;
+                    }
+                }
+                
+                const productSel = targetRow.querySelector('select[name="product[]"]');
+                productSel.value = currentProduct.title;
+                checkSelections(productSel); 
+                
+                if (selectedFragrance) {
+                    const fragSel = targetRow.querySelector('.frag-select');
+                    if(fragSel) fragSel.value = selectedFragrance;
+                }
+                if (selectedSize) {
+                    const sizeSel = targetRow.querySelector('.size-select');
+                    if(sizeSel) {
+                        // Ensure options are updated before setting value
+                        const evt = new Event('change');
+                        const fragSel = targetRow.querySelector('.frag-select');
+                        if (fragSel) fragSel.dispatchEvent(evt);
+                        sizeSel.value = selectedSize;
+                    }
+                }
+            }
+            
+            closeProductModal();
+            document.getElementById('connect').scrollIntoView({ behavior: 'smooth' });
+            showToast("Item added! Submit the form below to secure your order.");
+        }
+
         // --- 5. FORM LOGIC ---
+        function removeProductField(btn) {
+            const row = btn.closest('.product-row');
+            const container = document.getElementById('product-fields');
+            row.remove();
+            if(container.querySelectorAll('.product-row').length === 0) {
+                addProductField();
+            }
+        }
+
+        function checkSelections(selectEl) {
+            const title = selectEl.value;
+            const row = selectEl.closest('.product-row');
+            const variantContainer = row.querySelector('.variant-options');
+            variantContainer.innerHTML = ''; 
+
+            let productKey = Object.keys(productsData).find(k => productsData[k].title === title);
+            if(!productKey) return;
+
+            const product = productsData[productKey];
+            const variants = product.variants;
+            const fragKeys = Object.keys(variants);
+            
+            // Fragrance Select
+            if(product.hasOptions && fragKeys.length > 1) {
+                const fragSelect = document.createElement('select');
+                fragSelect.className = 'frag-select';
+                fragSelect.style.marginBottom = "0";
+                fragKeys.forEach(frag => {
+                    const opt = document.createElement('option');
+                    opt.value = frag;
+                    opt.innerText = frag;
+                    fragSelect.appendChild(opt);
+                });
+                fragSelect.onchange = () => updateSizeForForm(product, fragSelect, row);
+                variantContainer.appendChild(fragSelect);
+            }
+
+            // Size Select
+            const sizeSelect = document.createElement('select');
+            sizeSelect.className = 'size-select';
+            sizeSelect.style.marginBottom = "0";
+            variantContainer.appendChild(sizeSelect);
+            
+            const initialFrag = (product.hasOptions && fragKeys.length > 1) ? fragKeys[0] : fragKeys[0];
+            updateSizeForForm(product, {value: initialFrag}, row);
+        }
+
+        function updateSizeForForm(product, fragSelectEl, row) {
+            const sizeSelect = row.querySelector('.size-select');
+            sizeSelect.innerHTML = '';
+            const fragVal = fragSelectEl.value || Object.keys(product.variants)[0];
+            const sizeKeys = Object.keys(product.variants[fragVal] || {});
+            
+            sizeKeys.forEach(sz => {
+                const opt = document.createElement('option');
+                opt.value = sz;
+                opt.innerText = sz;
+                sizeSelect.appendChild(opt);
+            });
+        }
+
         function addProductField() {
             const container = document.getElementById('product-fields');
             const count = container.querySelectorAll('.product-row').length;
@@ -844,15 +968,16 @@
             const div = document.createElement('div');
             div.className = 'product-row';
             div.innerHTML = `
-                <select name="product[]">
+                <select name="product[]" onchange="checkSelections(this)">
                     <option value="" disabled selected>Select Product</option>
                     ${Object.values(productsData).map(p => `<option value="${p.title}">${p.title}</option>`).join('')}
                 </select>
+                <div class="variant-options"></div>
                 <div class="product-counter">
                     <button type="button" onclick="updateCounter(this, -1)">-</button>
                     <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
                     <button type="button" onclick="updateCounter(this, 1)">+</button>
-                    <button type="button" onclick="this.closest('.product-row').remove()" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
+                    <button type="button" onclick="removeProductField(this)" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
                 </div>
             `;
             container.appendChild(div);
@@ -873,9 +998,18 @@
             // Gather product details text
             let productText = "";
             this.querySelectorAll('.product-row').forEach(row => {
-                const sel = row.querySelector('select');
+                const sel = row.querySelector('select[name="product[]"]');
+                const pName = sel ? sel.value : "";
+                
+                let variantText = "";
+                const fragSel = row.querySelector('.frag-select');
+                if (fragSel && fragSel.value) variantText += ` [${fragSel.value}]`;
+                
+                const sizeSel = row.querySelector('.size-select');
+                if (sizeSel && sizeSel.value) variantText += ` (${sizeSel.value})`;
+
                 const qty = row.querySelector('input');
-                if(sel.value) productText += `${sel.value} (Qty: ${qty.value})\n`;
+                if(pName) productText += `${pName}${variantText} (Qty: ${qty.value})\n`;
             });
 
             const templateParams = {
