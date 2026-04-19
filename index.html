@@ -5,352 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Softleaf - Global Hygiene & Cleaning Solutions</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-    <style>
-        /* --- CSS Variables --- */
-        :root {
-            --primary-green: #4CAF50;
-            --dark-green: #2E7D32;
-            --secondary-mint: #E8F5E9;
-            --accent-sage: #708238;
-            --white: #FFFFFF;
-            --text-dark: #1A1A1A;
-            --text-grey: #555555;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 20px 40px rgba(76, 175, 80, 0.15);
-        }
-
-        /* --- Global Reset & Typography --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .brand-font { font-family: 'Marcellus', serif; }
-        
-        img { display: block; max-width: 100%; }
-
-        /* --- Navigation (Glassmorphism) --- */
-        nav {
-            position: fixed; /* Fixed to stay on top while scrolling past full screen hero */
-            top: 0;
-            width: 100%;
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000;
-            padding: 15px 40px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo { display: flex; align-items: center; cursor: pointer; gap: 10px; }
-        .logo img { height: 32px; }
-        .logo span { font-size: 26px; color: var(--accent-sage); font-weight: 400; }
-
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary-green); }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px;
-            bottom: -4px; left: 0; background-color: var(--primary-green);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-
-        .menu-icon { display: none; cursor: pointer; }
-
-        /* --- Hero Section --- */
-        .hero {
-            position: relative;
-            height: 100vh; /* Occupy full viewport height */
-            width: 100%;
-            background: linear-gradient(135deg, #e0f2f1 0%, #E8F5E9 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 20px;
-            /* Offset for fixed nav if needed, but centering usually looks best without offset */
-        }
-
-        /* Decorative Background Pattern */
-        .hero::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.4)" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,186.7C672,171,768,149,864,144C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            z-index: 1;
-            pointer-events: none; /* Let clicks pass through */
-        }
-
-        .hero-content {
-            position: relative; 
-            z-index: 2;
-            max-width: 900px; 
-            padding: 20px; 
-            text-align: center;
-            /* Removed box styling */
-            background: none;
-            backdrop-filter: none;
-            border: none;
-            box-shadow: none;
-        }
-
-        .hero-content h1 { 
-            font-size: 5rem; 
-            color: var(--accent-sage); 
-            margin-bottom: 15px; 
-            line-height: 1.1; 
-        }
-        
-        .hero-content h2 { 
-            font-size: 2rem; 
-            color: var(--dark-green); 
-            margin-bottom: 25px; 
-            font-weight: 400; 
-        }
-        
-        .hero-content p { 
-            font-size: 1.25rem; 
-            color: var(--text-grey); 
-            margin-bottom: 45px; 
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background-color: var(--primary-green);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-            font-size: 1.1rem;
-        }
-        .cta-btn:hover { background-color: var(--dark-green); transform: translateY(-2px); }
-
-        /* --- Products Section --- */
-        .products-section { padding: 80px 40px; max-width: 1400px; margin: 0 auto; }
-        .section-title { font-size: 2.5rem; color: var(--accent-sage); text-align: center; margin-bottom: 60px; }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.03);
-            display: flex; flex-direction: column;
-        }
-
-        .product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
-
-        .product-card img {
-            width: 100%; height: 240px; object-fit: cover;
-            background-color: #f0f0f0; transition: transform 0.5s ease;
-        }
-        .product-card:hover img { transform: scale(1.05); }
-
-        .product-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-card-content h3 { font-size: 1.25rem; color: var(--text-dark); margin-bottom: 8px; }
-        .product-card-content p { font-size: 0.95rem; color: var(--text-grey); margin-bottom: 15px; }
-        
-        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
-        .view-btn { font-size: 0.9rem; color: var(--primary-green); font-weight: 600; }
-
-        /* --- Modal (Modern Grid) --- */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
-            z-index: 2000; padding: 20px; justify-content: center; align-items: center;
-        }
-
-        .modal-content {
-            background-color: var(--white);
-            border-radius: 24px;
-            width: 100%; max-width: 900px;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Split 50/50 */
-            overflow: hidden;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-image-col img {
-            width: 100%; height: 100%; object-fit: cover; min-height: 300px;
-        }
-
-        .modal-details-col { padding: 40px; display: flex; flex-direction: column; gap: 20px; }
-
-        .close-btn {
-            position: absolute; top: 20px; right: 20px;
-            width: 32px; height: 32px; border-radius: 50%;
-            background: rgba(255,255,255,0.8);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; cursor: pointer; z-index: 10;
-        }
-
-        .modal-price { font-size: 2rem; font-weight: 600; color: var(--primary-green); font-family: 'Marcellus', serif; }
-
-        /* Modal Form Elements */
-        .modal-options label { display: block; font-size: 0.9rem; color: #666; margin-bottom: 5px; }
-        .modal-options select {
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;
-            background: #FAFAFA; font-family: inherit; margin-bottom: 15px;
-            cursor: pointer;
-        }
-        
-        .stamp-selector { display: flex; gap: 10px; margin-bottom: 20px; }
-        .stamp-image {
-            width: 50px; height: 50px; border-radius: 8px; border: 2px solid transparent;
-            cursor: pointer; object-fit: cover;
-        }
-        .stamp-image.active { border-color: var(--primary-green); box-shadow: 0 0 0 3px rgba(76,175,80,0.2); }
-
-        .buy-now-btn {
-            background-color: #FF9900; color: white; text-align: center;
-            padding: 15px; border-radius: 8px; text-decoration: none;
-            font-weight: 600; transition: background 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .buy-now-btn:hover { background-color: #e68a00; }
-
-        /* --- Marketplace & Commitment --- */
-        .marketplace-section { padding: 80px 40px; background-color: var(--secondary-mint); text-align: center; }
-        .marketplace-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .marketplace-links a {
-            background: white; padding: 15px 30px; border-radius: 50px;
-            text-decoration: none; color: var(--text-dark); font-weight: 500;
-            display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s;
-        }
-        .marketplace-links a:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-
-        .commitment-section { padding: 80px 20px; text-align: center; background: white; }
-        .commitment-icons { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 40px; }
-        .commitment-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 120px; }
-        .commitment-item svg { color: var(--primary-green); width: 40px; height: 40px; }
-        .commitment-item span { font-size: 0.9rem; font-weight: 500; }
-
-        /* --- Connect Form --- */
-        .connect-section {
-            padding: 80px 40px; max-width: 1400px; margin: 0 auto;
-            display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px;
-        }
-
-        .form-box { background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-soft); }
-        .info-box { 
-            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
-            padding: 40px; border-radius: 20px;
-        }
-
-        input, textarea, select {
-            width: 100%; padding: 14px; margin-bottom: 15px;
-            border: 1px solid #E0E0E0; border-radius: 8px; background: #F8F9FA;
-            font-family: inherit; font-size: 15px; transition: all 0.3s;
-        }
-        input:focus, textarea:focus, select:focus {
-            background: white; border-color: var(--primary-green); outline: none;
-            box-shadow: 0 0 0 4px rgba(76,175,80,0.1);
-        }
-
-        .submit-btn {
-            width: 100%; background: var(--text-dark); color: white;
-            border: none; padding: 16px; border-radius: 8px;
-            font-size: 16px; cursor: pointer; transition: background 0.3s;
-        }
-        .submit-btn:hover { background: #333; }
-
-        /* Product Repeater Styles */
-        .product-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
-        .product-row select { margin-bottom: 0; flex: 1; min-width: 150px; }
-        .variant-options { display: flex; gap: 10px; flex: 2; min-width: 200px; }
-        .product-counter { display: flex; align-items: center; gap: 5px; }
-        .product-counter button { 
-            padding: 8px 12px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; 
-        }
-        .product-counter input { width: 40px; text-align: center; margin: 0; padding: 8px; }
-        
-        .add-btn { background: var(--secondary-mint); color: var(--dark-green); border: none; padding: 10px 20px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 13px; }
-
-        /* --- Footer --- */
-        footer { background: #f4f4f4; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        .footer-logo { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
-
-        /* --- Toast Notification --- */
-        #toast {
-            visibility: hidden; min-width: 280px;
-            background-color: #333; color: #fff; text-align: center;
-            border-radius: 8px; padding: 16px; position: fixed; z-index: 3000;
-            left: 50%; bottom: 30px; transform: translateX(-50%);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            opacity: 0; transition: opacity 0.5s, bottom 0.5s;
-        }
-        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
-
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) {
-            .nav-container { padding: 0; }
-            .menu-icon { display: block; }
-            .nav-links {
-                display: none; position: absolute; top: 100%; left: 0; width: 100%;
-                background: white; flex-direction: column; padding: 20px; gap: 15px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            .nav-links.active { display: flex; }
-            
-            .hero-content h1 { font-size: 3rem; }
-            .hero-content h2 { font-size: 1.5rem; }
-            
-            .connect-section { grid-template-columns: 1fr; }
-            
-            .modal-content { grid-template-columns: 1fr; max-height: 95vh; }
-            .modal-image-col img { height: 250px; }
-            .modal-details-col { padding: 25px; }
-            
-            .product-row { flex-wrap: wrap; }
-            .product-row select { width: 100%; flex: auto; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -373,16 +32,16 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero fade-in">
         <div class="hero-content">
             <h1>Softleaf</h1>
-            <h2>Clean Spaces, Clear Mind</h2>
-            <p>Blending sustainable care with nature-inspired scents to create fresh, comforting homes you’ll love coming back to.</p>
+            <h2>The Future of Pure Spaces</h2>
+            <p>Advanced scientific formulation. Absolute protection. Elevate your sanctuary with our next-generation hygiene solutions engineered for uncompromising cleanliness.</p>
             <a href="#products" class="cta-btn">Explore Collection</a>
         </div>
     </section>
 
-    <section class="products-section" id="products">
+    <section class="products-section fade-in" id="products">
         <h2 class="section-title">Our Collection</h2>
         <div class="product-grid" id="product-grid-container">
             
@@ -460,7 +119,7 @@
         </div>
     </section>
 
-    <section class="marketplace-section" id="marketplace">
+    <section class="marketplace-section fade-in" id="marketplace">
         <h2 class="section-title">Where to Buy</h2>
         <p>Purchase convenient Softleaf items from trusted partners.</p>
         <div class="marketplace-links">
@@ -475,26 +134,26 @@
         </div>
     </section>
 
-    <section class="commitment-section">
-        <h2 class="section-title">The Softleaf Commitment</h2>
-        <p style="max-width: 600px; margin: 0 auto; color: #666;">Dedicated to high-quality hygiene that is sustainably sourced. Our products align with our core values of conservation and eco-consciousness.</p>
+    <section class="commitment-section fade-in">
+        <h2 class="section-title">Scientific Precision</h2>
+        <p style="max-width: 600px; margin: 0 auto; color: #666;">Engineered to eliminate unseen threats. Our bio-mint and cyan grade formulations represent the apex of modern space purification technology, keeping your environment perfectly sterile.</p>
         <div class="commitment-icons">
             <div class="commitment-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
-                <span>Natural</span>
+                <span>Bio-Tech</span>
             </div>
             <div class="commitment-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <span>Cruelty-Free</span>
+                <span>Lab Tested</span>
             </div>
             <div class="commitment-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20"></path><path d="M12 2a14.5 14.5 0 0 1 0 20"></path><path d="M2 12h20"></path></svg>
-                <span>Ethical</span>
+                <span>Next-Gen Purity</span>
             </div>
         </div>
     </section>
 
-    <section class="connect-section" id="connect">
+    <section class="connect-section fade-in" id="connect">
         <div class="form-box">
             <h3>Get In Touch</h3>
             <p style="margin-bottom: 20px; color: #666;">Bulk orders or general inquiries? We are here to help.</p>
@@ -542,7 +201,7 @@
                 <button type="submit" class="submit-btn" style="background: var(--primary-green);">Request Brochure</button>
             </form>
             
-            <a href="https://wa.me/+919048994992" target="_blank" class="submit-btn" style="background: #25D366; text-align: center; display: block; text-decoration: none; margin-bottom: 30px;">
+            <a href="https://wa.me/+919847485332" target="_blank" class="submit-btn" style="background: #25D366; text-align: center; display: block; text-decoration: none; margin-bottom: 30px;">
                 Chat on WhatsApp
             </a>
 
@@ -556,12 +215,12 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="fade-in">
         <div class="footer-logo">
             <img src="leaf-icon.png" alt="Leaf" style="height: 24px;">
             <span class="brand-font" style="font-size: 20px; color: var(--accent-sage);">Softleaf</span>
         </div>
-        <p style="color: #888; font-size: 14px;">© 2025 Softleaf. Clean Spaces, Clear Mind.<br>Thrissur, Kerala, India</p>
+        <p style="color: #888; font-size: 14px;">© 2025 Softleaf. The Future of Pure Spaces.<br>Thrissur, Kerala, India</p>
     </footer>
 
     <div class="modal" id="productModal">
@@ -599,453 +258,10 @@
         </div>
     </div>
 
-    <script>
-        // --- 1. CONFIGURATION ---
-        (function() {
-            // REPLACE WITH YOUR PUBLIC KEY
-            emailjs.init("-WJ90BZg2Us5oMo4c"); 
-        })();
+    
 
-        // --- 2. DATA (Cleaned up from HTML) ---
-        const productsData = {
-            "handwash": {
-                title: "Softleaf Handwash",
-                desc: "Gentle yet effective, infused with our signature fragrance.",
-                image: "Products/Handwash.png",
-                hasOptions: true,
-                variants: {
-                    "Standard": {
-                        "250 ml": { price: 150, url: "#", img: "Products/Handwash.png" }
-                    },
-                    "Green Apple": {
-                        "250 ml": { price: 150, url: "#", img: "Products/Handwash greenapple.png" }
-                    },
-                    "Lavender": {
-                        "250 ml": { price: 150, url: "#", img: "Products/Handwash lavender.png" }
-                    },
-                    "Rose": {
-                        "250 ml": { price: 150, url: "#", img: "Products/Handwash rose.png" }
-                    }
-                }
-            },
-            "dishwash": {
-                title: "Dishwash Gel",
-                desc: "Kills 99.9% of germs, Tough on grease, kind to hands.",
-                image: "Products/Dishwash 500ml.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "500 ml": { price: 120, url: "#", img: "Products/Dishwash 500ml.png" },
-                        "1 ltr": { price: 220, url: "#", img: "Products/Dishwash 1L.png" }
-                    }
-                }
-            },
-            "floor": {
-                title: "Floor Cleaner Collection",
-                desc: "A range of floor cleaners with unique fragrances.",
-                image: "Products/FL lavender 1L.png",
-                hasOptions: true,
-                variants: {
-                    "Lavender": { "500 ml": { price: 100, url: "#", img: "Products/FL lavender.png"}, "1 ltr": { price: 180, url: "#", img: "Products/FL lavender 1L.png"} },
-                    "Orange": { "500 ml": { price: 100, url: "#", img: "Products/FL orange.png"}, "1 ltr": { price: 180, url: "#", img: "Products/FL orange 1L.png"} },
-                    "Rose": { "1 ltr": { price: 180, url: "#", img: "Products/FL rose 1L.png"} },
-                    "Sandal": { "1 ltr": { price: 180, url: "#", img: "Products/FL sandal 1L.png"} }
-                }
-            },
-            "glass": {
-                title: "Clear Glass Cleaner",
-                desc: "Streak-free shine for a crystal-clear finish.",
-                image: "Products/Glasscleaner 500ml.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "500 ml": { price: 90, url: "#", img: "Products/Glasscleaner 500ml.png" }
-                    }
-                }
-            },
-            "detergent": {
-                title: "Liquid Detergent",
-                desc: "Powerful stain removal with a gentle touch.",
-                image: "Products/Detergent1L.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "300 ml": { price: 100, url: "#", img: "Products/Detergent 300ml.png" },
-                        "1 ltr": { price: 300, url: "#", img: "Products/Detergent1L.png" }
-                    }
-                }
-            },
-            "toilet": {
-                title: "Deep Toilet Cleaner",
-                desc: "Deep clean with a refreshing aroma.",
-                image: "Products/Toiletcleaner 600ml.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "600 ml": { price: 110, url: "#", img: "Products/Toiletcleaner 600ml.png" },
-                        "1 ltr": { price: 180, url: "#", img: "Products/Toiletcleaner 1L.png" }
-                    }
-                }
-            },
-            "power_toilet": {
-                title: "Power Toilet Cleaner",
-                desc: "Advanced stain removal for ultimate hygiene.",
-                image: "Products/Tolietcleanerblack 500ml.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "500 ml": { price: 130, url: "#", img: "Products/Tolietcleanerblack 500ml.png" }
-                    }
-                }
-            },
-            "cleaner": {
-                title: "All-Purpose Cleaner",
-                desc: "Your solution for safe, clean surfaces everywhere.",
-                image: "Products/Cleaner 1L.png",
-                hasOptions: false,
-                variants: {
-                    "Standard": {
-                        "1 ltr": { price: 150, url: "#", img: "Products/Cleaner 1L.png" }
-                    }
-                }
-            }
-        };
+    
 
-        // --- 3. UI LOGIC ---
-        
-        // Navigation Toggle
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Toast Notification
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.className = "show";
-            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
-        // --- 4. MODAL LOGIC ---
-        let currentProduct = null;
-        let selectedFragrance = null;
-        let selectedSize = null;
-
-        function openProduct(id) {
-            const data = productsData[id];
-            if(!data) return;
-
-            currentProduct = data;
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalDescription').innerText = data.desc;
-            document.getElementById('modalImage').src = data.image;
-
-            const fragSelect = document.getElementById('fragranceSelect');
-            const fragContainer = document.getElementById('fragranceContainer');
-            
-            // Setup Fragrance Dropdown
-            fragSelect.innerHTML = '';
-            const fragKeys = Object.keys(data.variants);
-            
-            if(data.hasOptions && fragKeys.length > 1) {
-                fragContainer.style.display = 'block';
-                fragKeys.forEach(frag => {
-                    const opt = document.createElement('option');
-                    opt.value = frag;
-                    opt.innerText = frag;
-                    fragSelect.appendChild(opt);
-                });
-                selectedFragrance = fragKeys[0];
-            } else {
-                fragContainer.style.display = 'none';
-                selectedFragrance = "Standard"; 
-                // Handle case where product has options but technically listed as "Standard" in data
-                if(fragKeys.length > 0) selectedFragrance = fragKeys[0];
-            }
-
-            fragSelect.onchange = (e) => {
-                selectedFragrance = e.target.value;
-                updateSizeOptions();
-            };
-
-            updateSizeOptions(); // Initialize sizes based on first fragrance
-            document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function updateSizeOptions() {
-            const sizeSelect = document.getElementById('sizeSelect');
-            sizeSelect.innerHTML = '';
-            
-            const variantData = currentProduct.variants[selectedFragrance];
-            const sizes = Object.keys(variantData);
-
-            sizes.forEach(size => {
-                const opt = document.createElement('option');
-                opt.value = size;
-                opt.innerText = size;
-                sizeSelect.appendChild(opt);
-            });
-
-            selectedSize = sizes[0];
-            sizeSelect.onchange = (e) => {
-                selectedSize = e.target.value;
-                updateDetails();
-            };
-
-            updateDetails();
-        }
-
-        function updateDetails() {
-            const details = currentProduct.variants[selectedFragrance][selectedSize];
-            
-            // Update Price
-            document.getElementById('modalPrice').innerText = `₹${details.price}`;
-            
-            // Update Link removed for Add to Inquiry
-
-            // Update Image (if variant has specific image)
-            if(details.img) {
-                document.getElementById('modalImage').src = details.img;
-            }
-
-            // Update Stamps
-            const stampContainer = document.getElementById('stampSelector');
-            stampContainer.innerHTML = '';
-            const variantData = currentProduct.variants[selectedFragrance];
-            Object.keys(variantData).forEach(sz => {
-                if(variantData[sz].img) {
-                    const img = document.createElement('img');
-                    img.src = variantData[sz].img;
-                    img.className = `stamp-image ${sz === selectedSize ? 'active' : ''}`;
-                    img.onclick = () => {
-                        document.getElementById('sizeSelect').value = sz;
-                        selectedSize = sz;
-                        updateDetails();
-                    };
-                    stampContainer.appendChild(img);
-                }
-            });
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target === document.getElementById('productModal')) {
-                closeProductModal();
-            }
-        };
-
-        function addToInquiry(e) {
-            e.preventDefault();
-            const container = document.getElementById('product-fields');
-            let rows = container.querySelectorAll('.product-row');
-            
-            let added = false;
-            rows.forEach(row => {
-                const select = row.querySelector('select[name="product[]"]');
-                const fragSel = row.querySelector('.frag-select');
-                const sizeSel = row.querySelector('.size-select');
-                
-                let matchesTitle = select && select.value === currentProduct.title;
-                let matchesFrag = !fragSel || (selectedFragrance && fragSel.value === selectedFragrance);
-                let matchesSize = !sizeSel || (selectedSize && sizeSel.value === selectedSize);
-
-                if (matchesTitle && matchesFrag && matchesSize) {
-                    updateCounter(row.querySelector('button'), 1);
-                    added = true;
-                }
-            });
-
-            if (!added) {
-                let emptyRow = Array.from(rows).find(row => !row.querySelector('select[name="product[]"]').value);
-                let targetRow = emptyRow;
-                
-                if(!targetRow) {
-                    if(rows.length < 5) {
-                        addProductField();
-                        const newRows = container.querySelectorAll('.product-row');
-                        targetRow = newRows[newRows.length - 1];
-                    } else {
-                        showToast("List is full. Submit text in message.");
-                        return;
-                    }
-                }
-                
-                const productSel = targetRow.querySelector('select[name="product[]"]');
-                productSel.value = currentProduct.title;
-                checkSelections(productSel); 
-                
-                if (selectedFragrance) {
-                    const fragSel = targetRow.querySelector('.frag-select');
-                    if(fragSel) fragSel.value = selectedFragrance;
-                }
-                if (selectedSize) {
-                    const sizeSel = targetRow.querySelector('.size-select');
-                    if(sizeSel) {
-                        // Ensure options are updated before setting value
-                        const evt = new Event('change');
-                        const fragSel = targetRow.querySelector('.frag-select');
-                        if (fragSel) fragSel.dispatchEvent(evt);
-                        sizeSel.value = selectedSize;
-                    }
-                }
-            }
-            
-            closeProductModal();
-            document.getElementById('connect').scrollIntoView({ behavior: 'smooth' });
-            showToast("Item added! Submit the form below to secure your order.");
-        }
-
-        // --- 5. FORM LOGIC ---
-        function removeProductField(btn) {
-            const row = btn.closest('.product-row');
-            const container = document.getElementById('product-fields');
-            row.remove();
-            if(container.querySelectorAll('.product-row').length === 0) {
-                addProductField();
-            }
-        }
-
-        function checkSelections(selectEl) {
-            const title = selectEl.value;
-            const row = selectEl.closest('.product-row');
-            const variantContainer = row.querySelector('.variant-options');
-            variantContainer.innerHTML = ''; 
-
-            let productKey = Object.keys(productsData).find(k => productsData[k].title === title);
-            if(!productKey) return;
-
-            const product = productsData[productKey];
-            const variants = product.variants;
-            const fragKeys = Object.keys(variants);
-            
-            // Fragrance Select
-            if(product.hasOptions && fragKeys.length > 1) {
-                const fragSelect = document.createElement('select');
-                fragSelect.className = 'frag-select';
-                fragSelect.style.marginBottom = "0";
-                fragKeys.forEach(frag => {
-                    const opt = document.createElement('option');
-                    opt.value = frag;
-                    opt.innerText = frag;
-                    fragSelect.appendChild(opt);
-                });
-                fragSelect.onchange = () => updateSizeForForm(product, fragSelect, row);
-                variantContainer.appendChild(fragSelect);
-            }
-
-            // Size Select
-            const sizeSelect = document.createElement('select');
-            sizeSelect.className = 'size-select';
-            sizeSelect.style.marginBottom = "0";
-            variantContainer.appendChild(sizeSelect);
-            
-            const initialFrag = (product.hasOptions && fragKeys.length > 1) ? fragKeys[0] : fragKeys[0];
-            updateSizeForForm(product, {value: initialFrag}, row);
-        }
-
-        function updateSizeForForm(product, fragSelectEl, row) {
-            const sizeSelect = row.querySelector('.size-select');
-            sizeSelect.innerHTML = '';
-            const fragVal = fragSelectEl.value || Object.keys(product.variants)[0];
-            const sizeKeys = Object.keys(product.variants[fragVal] || {});
-            
-            sizeKeys.forEach(sz => {
-                const opt = document.createElement('option');
-                opt.value = sz;
-                opt.innerText = sz;
-                sizeSelect.appendChild(opt);
-            });
-        }
-
-        function addProductField() {
-            const container = document.getElementById('product-fields');
-            const count = container.querySelectorAll('.product-row').length;
-            if(count >= 5) { showToast("Maximum 5 products allowed."); return; }
-
-            const div = document.createElement('div');
-            div.className = 'product-row';
-            div.innerHTML = `
-                <select name="product[]" onchange="checkSelections(this)">
-                    <option value="" disabled selected>Select Product</option>
-                    ${Object.values(productsData).map(p => `<option value="${p.title}">${p.title}</option>`).join('')}
-                </select>
-                <div class="variant-options"></div>
-                <div class="product-counter">
-                    <button type="button" onclick="updateCounter(this, -1)">-</button>
-                    <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
-                    <button type="button" onclick="updateCounter(this, 1)">+</button>
-                    <button type="button" onclick="removeProductField(this)" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
-                </div>
-            `;
-            container.appendChild(div);
-        }
-
-        function updateCounter(btn, val) {
-            const input = btn.parentElement.querySelector('input');
-            let newVal = parseInt(input.value) + val;
-            if(newVal < 1) newVal = 1;
-            input.value = newVal;
-        }
-
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            btn.innerText = "Sending...";
-            
-            // Gather product details text
-            let productText = "";
-            this.querySelectorAll('.product-row').forEach(row => {
-                const sel = row.querySelector('select[name="product[]"]');
-                const pName = sel ? sel.value : "";
-                
-                let variantText = "";
-                const fragSel = row.querySelector('.frag-select');
-                if (fragSel && fragSel.value) variantText += ` [${fragSel.value}]`;
-                
-                const sizeSel = row.querySelector('.size-select');
-                if (sizeSel && sizeSel.value) variantText += ` (${sizeSel.value})`;
-
-                const qty = row.querySelector('input');
-                if(pName) productText += `${pName}${variantText} (Qty: ${qty.value})\n`;
-            });
-
-            const templateParams = {
-                from_name: this.name.value,
-                from_email: this.email.value,
-                phone: this.phone.value,
-                message: this.message.value + "\n\nProducts:\n" + productText
-            };
-
-            emailjs.send("service_nvtpn9o", "template_e3sonzq", templateParams)
-            .then(() => {
-                showToast("Message Sent Successfully!");
-                this.reset();
-                btn.innerText = "Send Message";
-            }, (err) => {
-                showToast("Failed to send. Try again.");
-                btn.innerText = "Send Message";
-                console.error(err);
-            });
-        });
-
-        document.getElementById('brochure-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            btn.innerText = "...";
-            
-            emailjs.send("service_nvtpn9o", "template_ty9do8j", { to_email: this.email.value })
-            .then(() => {
-                showToast("Brochure request sent!");
-                this.reset();
-                btn.innerText = "Request Brochure";
-            }, () => {
-                showToast("Error sending request.");
-                btn.innerText = "Request Brochure";
-            });
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
