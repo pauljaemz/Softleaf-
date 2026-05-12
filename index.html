@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Softleaf - Global Hygiene & Cleaning Solutions</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
     <div id="toast"></div>
@@ -22,7 +26,12 @@
                 <span class="brand-font">Softleaf</span>
             </div>
             <div class="menu-icon" onclick="toggleMenu()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12"></line>
+                    <line x1="4" x2="20" y1="6" y2="6"></line>
+                    <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
             </div>
             <div class="nav-links" id="navLinks">
                 <a href="#products">Products</a>
@@ -34,9 +43,11 @@
 
     <section class="hero fade-in">
         <div class="hero-content">
+            <img src="leaf-icon.png" alt="Softleaf Logo" class="hero-logo" width="100">
             <h1>Softleaf</h1>
             <h2>The Future of Pure Spaces</h2>
-            <p>Advanced scientific formulation. Absolute protection. Elevate your sanctuary with our next-generation hygiene solutions engineered for uncompromising cleanliness.</p>
+            <p>Advanced scientific formulation. Absolute protection. Elevate your sanctuary with our next-generation
+                hygiene solutions engineered for uncompromising cleanliness.</p>
             <a href="#products" class="cta-btn">Explore Collection</a>
         </div>
     </section>
@@ -44,9 +55,9 @@
     <section class="products-section fade-in" id="products">
         <h2 class="section-title">Our Collection</h2>
         <div class="product-grid" id="product-grid-container">
-            
+
             <div class="product-card" onclick="openProduct('handwash')">
-                <img src="Products/Handwash.png" alt="Softleaf Handwash" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Softleaf+Handwash'">
+                <img src="Products/Handwash.png" alt="Softleaf Handwash">
                 <div class="product-card-content">
                     <h3>Softleaf Handwash</h3>
                     <p>Gentle yet effective, infused with signature fragrance.</p>
@@ -55,7 +66,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('dishwash')">
-                <img src="Products/Dishwash 500ml.png" alt="Dish Wash" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Dish+Wash'">
+                <img src="Products/Dishwash 500ml.png" alt="Dish Wash">
                 <div class="product-card-content">
                     <h3>Dishwash Gel</h3>
                     <p>Tough on grease, kind to hands.</p>
@@ -64,7 +75,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('floor')">
-                <img src="Products/FL lavender 1L.png" alt="Floor Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Floor+Cleaner'">
+                <img src="Products/FL lavender 1L.png" alt="Floor Cleaner">
                 <div class="product-card-content">
                     <h3>Floor Cleaner Collection</h3>
                     <p>Unique fragrances for a refreshed home.</p>
@@ -73,7 +84,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('glass')">
-                <img src="Products/Glasscleaner 500ml.png" alt="Glass Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Glass+Cleaner'">
+                <img src="Products/Glasscleaner 500ml.png" alt="Glass Cleaner">
                 <div class="product-card-content">
                     <h3>Clear Glass Cleaner</h3>
                     <p>Streak-free shine for a crystal-clear finish.</p>
@@ -82,7 +93,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('detergent')">
-                <img src="Products/Detergent1L.png" alt="Liquid Detergent" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Liquid+Detergent'">
+                <img src="Products/Detergent1L.png" alt="Liquid Detergent">
                 <div class="product-card-content">
                     <h3>Liquid Detergent</h3>
                     <p>Powerful stain removal with a gentle touch.</p>
@@ -91,7 +102,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('toilet')">
-                <img src="Products/Toiletcleaner 600ml.png" alt="Toilet Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Toilet+Cleaner'">
+                <img src="Products/Toiletcleaner 600ml.png" alt="Toilet Cleaner">
                 <div class="product-card-content">
                     <h3>Deep Toilet Cleaner</h3>
                     <p>Deep clean with a refreshing aroma.</p>
@@ -99,8 +110,8 @@
                 </div>
             </div>
 
-             <div class="product-card" onclick="openProduct('power_toilet')">
-                <img src="Products/Tolietcleanerblack 500ml.png" alt="Power Toilet Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=Power+Cleaner'">
+            <div class="product-card" onclick="openProduct('power_toilet')">
+                <img src="Products/Tolietcleanerblack 500ml.png" alt="Power Toilet Cleaner">
                 <div class="product-card-content">
                     <h3>Power Toilet Cleaner</h3>
                     <p>Advanced stain removal for ultimate hygiene.</p>
@@ -109,7 +120,7 @@
             </div>
 
             <div class="product-card" onclick="openProduct('cleaner')">
-                <img src="Products/Cleaner 1L.png" alt="All-Purpose Cleaner" onerror="this.src='https://via.placeholder.com/400x300/e0f2f1/708238?text=All+Purpose+Cleaner'">
+                <img src="Products/Cleaner 1L.png" alt="All-Purpose Cleaner">
                 <div class="product-card-content">
                     <h3>All-Purpose Cleaner</h3>
                     <p>Your solution for safe, clean surfaces everywhere.</p>
@@ -124,11 +135,20 @@
         <p>Purchase convenient Softleaf items from trusted partners.</p>
         <div class="marketplace-links">
             <a href="#amazon-store" id="amazon-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
                 Amazon Store
             </a>
             <a href="#local">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
                 Local Retailers
             </a>
         </div>
@@ -136,18 +156,35 @@
 
     <section class="commitment-section fade-in">
         <h2 class="section-title">Scientific Precision</h2>
-        <p style="max-width: 600px; margin: 0 auto; color: #666;">Engineered to eliminate unseen threats. Our bio-mint and cyan grade formulations represent the apex of modern space purification technology, keeping your environment perfectly sterile.</p>
+        <p style="max-width: 600px; margin: 0 auto; color: #666;">Engineered to eliminate unseen threats. Our bio-mint
+            and cyan grade formulations represent the apex of modern space purification technology, keeping your
+            environment perfectly sterile.</p>
         <div class="commitment-icons">
             <div class="commitment-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
                 <span>Bio-Tech</span>
             </div>
             <div class="commitment-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                </svg>
                 <span>Lab Tested</span>
             </div>
             <div class="commitment-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20"></path><path d="M12 2a14.5 14.5 0 0 1 0 20"></path><path d="M2 12h20"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20"></path>
+                    <path d="M12 2a14.5 14.5 0 0 1 0 20"></path>
+                    <path d="M2 12h20"></path>
+                </svg>
                 <span>Next-Gen Purity</span>
             </div>
         </div>
@@ -163,9 +200,10 @@
                     <input type="email" name="email" placeholder="Email Address">
                     <input type="tel" name="phone" placeholder="Phone Number">
                 </div>
-                
+
                 <div id="product-fields">
-                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; display: block;">Interested Products:</label>
+                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; display: block;">Interested
+                        Products:</label>
                     <div class="product-row">
                         <select name="product[]" onchange="checkSelections(this)">
                             <option value="" disabled selected>Select Product</option>
@@ -183,33 +221,51 @@
                             <button type="button" onclick="updateCounter(this, -1)">-</button>
                             <input type="number" name="numberNeeded[]" value="1" min="1" readonly>
                             <button type="button" onclick="updateCounter(this, 1)">+</button>
-                            <button type="button" onclick="removeProductField(this)" style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
+                            <button type="button" onclick="removeProductField(this)"
+                                style="background:none; color:red; font-size:18px; margin-left:5px;">&times;</button>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="add-btn" onclick="addProductField()">+ Add Another Product</button>
-                
-                <textarea name="message" placeholder="Additional details (Please include your delivery address if placing an order)" rows="4" style="margin-top: 15px;"></textarea>
+
+                <textarea name="message"
+                    placeholder="Additional details (Please include your delivery address if placing an order)" rows="4"
+                    style="margin-top: 15px;"></textarea>
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
-        
+
         <div class="info-box">
             <h3>Brochure & Social</h3>
             <form id="brochure-form" style="margin: 20px 0;">
                 <input type="email" name="email" placeholder="Enter Email for Brochure" required>
-                <button type="submit" class="submit-btn" style="background: var(--primary-green);">Request Brochure</button>
+                <button type="submit" class="submit-btn" style="background: var(--primary-green);">Request
+                    Brochure</button>
             </form>
-            
-            <a href="https://wa.me/+919847485332" target="_blank" class="submit-btn" style="background: #25D366; text-align: center; display: block; text-decoration: none; margin-bottom: 30px;">
+
+            <a href="https://wa.me/+919847485332" target="_blank" class="submit-btn"
+                style="background: #25D366; text-align: center; display: block; text-decoration: none; margin-bottom: 30px;">
                 Chat on WhatsApp
             </a>
 
             <div style="text-align: center;">
                 <h4>Follow Us</h4>
                 <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
-                    <a href="https://instagram.com" target="_blank"><svg width="24" height="24" stroke="#4CAF50" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a href="https://youtube.com/@softleafglobal" target="_blank"><svg width="24" height="24" stroke="#4CAF50" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                    <a href="https://instagram.com" target="_blank"><svg width="24" height="24" stroke="#4CAF50"
+                            fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg></a>
+                    <a href="https://youtube.com/@softleafglobal" target="_blank"><svg width="24" height="24"
+                            stroke="#4CAF50" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg></a>
                 </div>
             </div>
         </div>
@@ -220,17 +276,18 @@
             <img src="leaf-icon.png" alt="Leaf" style="height: 24px;">
             <span class="brand-font" style="font-size: 20px; color: var(--accent-sage);">Softleaf</span>
         </div>
-        <p style="color: #888; font-size: 14px;">© 2025 Softleaf. The Future of Pure Spaces.<br>Thrissur, Kerala, India</p>
+        <p style="color: #888; font-size: 14px;">© 2025 Softleaf. The Future of Pure Spaces.<br>Thrissur, Kerala, India
+        </p>
     </footer>
 
     <div class="modal" id="productModal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeProductModal()">×</div>
-            
+
             <div class="modal-image-col">
-                <img id="modalImage" src="" alt="Product" onerror="this.src='https://via.placeholder.com/600x600/e0f2f1/708238?text=Softleaf'">
+                <img id="modalImage" src="" alt="Product">
             </div>
-            
+
             <div class="modal-details-col">
                 <h3 id="modalTitle" class="brand-font" style="font-size: 1.8rem; color: var(--accent-sage);"></h3>
                 <p id="modalDescription" style="color: #666;"></p>
@@ -251,17 +308,21 @@
                 </div>
 
                 <a href="#" id="modalBuyNow" onclick="addToInquiry(event)" class="buy-now-btn">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg>
                     Add to Request
                 </a>
             </div>
         </div>
     </div>
 
-    
 
-    
+
+
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
